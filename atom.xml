@@ -94,7 +94,7 @@
     <link href="http://yoursite.com/2017/09/14/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%951-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/"/>
     <id>http://yoursite.com/2017/09/14/统计学习方法1-统计学习算法概述/</id>
     <published>2017-09-14T06:24:11.000Z</published>
-    <updated>2017-10-18T16:07:11.565Z</updated>
+    <updated>2017-10-19T14:58:51.540Z</updated>
     
     <content type="html"><![CDATA[<h2 id="统计学习的主要特点"><a href="#统计学习的主要特点" class="headerlink" title="统计学习的主要特点"></a>统计学习的主要特点</h2><pre><code>统计学习的对象是数据，目的是对数据进行预测与分析，特别是对未知数据进行预测与分析。</code></pre><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><pre><code>监督学习(supervised learning)无监督学习(unsupervised learning)半监督学习(self-supervised learning)增强式学习(reinfoucement learning)</code></pre><a id="more"></a><h3 id="监督学习-supervised-learning"><a href="#监督学习-supervised-learning" class="headerlink" title="监督学习(supervised learning)"></a>监督学习(supervised learning)</h3><p>输入实际x的特征向量记做$x = (x^{(1)},x^{(2)},x^{(3)}, \cdots ,x^{(n)})^T$<br>训练集：$T={(x_1,y_1),(x_2,y_2),(x_3,y_3),\cdots (x_n,y_n)}$<br>输入变量与输出变量均为连续变量的预测问题为回归问题；<br>输出变量为有限个离散变量的预测问题为分类问题；</p>]]></content>
     
@@ -109,6 +109,12 @@
     
     </summary>
     
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="统计学习方法" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
   </entry>
   

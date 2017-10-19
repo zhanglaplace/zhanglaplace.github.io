@@ -40,6 +40,13 @@
     <title><![CDATA[统计学习方法 1-统计学习算法概述]]></title>
     <url>%2F2017%2F09%2F14%2F%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%951-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0%2F</url>
     <content type="text"><![CDATA[统计学习的主要特点统计学习的对象是数据，目的是对数据进行预测与分析，特别是对未知数据进行预测与分析。 分类监督学习(supervised learning) 无监督学习(unsupervised learning) 半监督学习(self-supervised learning) 增强式学习(reinfoucement learning) 监督学习(supervised learning)输入实际x的特征向量记做$x = (x^{(1)},x^{(2)},x^{(3)}, \cdots ,x^{(n)})^T$训练集：$T={(x_1,y_1),(x_2,y_2),(x_3,y_3),\cdots (x_n,y_n)}$输入变量与输出变量均为连续变量的预测问题为回归问题；输出变量为有限个离散变量的预测问题为分类问题；]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>统计学习方法</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Linear Regression]]></title>
