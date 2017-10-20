@@ -106,7 +106,7 @@
 <meta property="og:description" content="Caffe_Layers1.基本数据结构1234//Layer层主要的的参数LayerParamter layer_param_; // protobuf内的layer参数vector&amp;lt;shared_ptr&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;gt;blobs_;//存储layer的参数，vector&amp;lt;bool&amp;gt;param_propagate_down_;//表">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images2017.cnblogs.com/blog/888534/201710/888534-20171019224727334-359802148.png">
-<meta property="og:updated_time" content="2017-10-19T15:06:17.926Z">
+<meta property="og:updated_time" content="2017-10-20T17:25:51.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe Layer分析">
 <meta name="twitter:description" content="Caffe_Layers1.基本数据结构1234//Layer层主要的的参数LayerParamter layer_param_; // protobuf内的layer参数vector&amp;lt;shared_ptr&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;gt;blobs_;//存储layer的参数，vector&amp;lt;bool&amp;gt;param_propagate_down_;//表">
@@ -432,6 +432,9 @@
 <h4 id="4-损失层-Loss-layer"><a href="#4-损失层-Loss-layer" class="headerlink" title="(4) 损失层(Loss_layer)"></a>(4) 损失层(Loss_layer)</h4><pre><code>最小化输出于目标的LOSS来驱动学习更新
 </code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Softmax</span></div></pre></td></tr></table></figure>
 <h3 id="4-说明"><a href="#4-说明" class="headerlink" title="4.说明"></a>4.说明</h3><p>SetUp函数需要根据实际的参数设置进行实现，对各种类型的参数初始化；Forward和Backward对应前向计算和反向更新，输入统一都是bottom，输出为top，其中Backward里面有个propagate_down参数，用来表示该Layer是否反向传播参数。<br>在Forward和Backward的具体实现里，会根据Caffe::mode()进行对应的操作，即使用cpu或者gpu进行计算，两个都实现了对应的接口Forward_cpu、Forward_gpu和Backward_cpu、Backward_gpu，这些接口都是virtual，具体还是要根据layer的类型进行对应的计算（注意：有些layer并没有GPU计算的实现，所以封装时加入了CPU的计算作为后备）。另外，还实现了ToProto的接口，将Layer的参数写入到protocol buffer文件中。</p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接： <a href="https://zhanglaplace.github.io/2017/10/19/Caffe_layer/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/19/Caffe_layer/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>

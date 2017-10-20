@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
 <meta property="og:description" content="Model and Cost Function(模型和损失函数)对于model，给出如下定义 $y = \theta x$损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-18T16:06:37.473Z">
+<meta property="og:updated_time" content="2017-10-20T17:26:47.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
 <meta name="twitter:description" content="Model and Cost Function(模型和损失函数)对于model，给出如下定义 $y = \theta x$损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$">
@@ -417,6 +417,9 @@
       
         <h2 id="Model-and-Cost-Function-模型和损失函数"><a href="#Model-and-Cost-Function-模型和损失函数" class="headerlink" title="Model and Cost Function(模型和损失函数)"></a>Model and Cost Function(模型和损失函数)</h2><p>对于model，给出如下定义 $y = \theta x$<br>损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$<br><a id="more"></a><br>Gradient descent algorithm<br>repeat until convergence{<br>    $\quad \theta_j := \theta_j - \alpha\frac{\partial}{\partial \theta_j}J(\theta)$<br>}</p>
 <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>寻找两类样本正中间的划分超平面，因为该超平面对训练样本的布局扰动的容忍度最好，是最鲁棒的<br>划分超平面方程:<br>$$wx+b = 0$$<br>我们假使<br>$$<br>\begin{cases}<br>wx_i+b &gt;= 1 \qquad\quad y_i = +1 \\\<br>\\<br>wx_i+b &lt;=-1 \qquad\, y_i = -1<br>\end{cases}<br>$$<br>则距离超平面最近的几个点使得下列式子成立<br>$$\max\limits_{w,b}(\frac{2}{||w||}) \rightarrow \min_{w,b}\frac{1}{2}||w||^2$$<br>$$s.t. y_i(wx_i+b)\ge 1 i = 1,2,…,m.$$<br>通用表达式:<br>    $f(x)=w\psi(x)+b = \sum_{i=1}^{m}a_iy_i\psi(x_i)^T\psi(x)+b=\sum_{i=1}^{m}a_iy_i\kappa(x,x_i)+b$<br>$\kappa 为核函数.$</p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接： <a href="https://zhanglaplace.github.io/2017/09/10/Linear-Regression/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/09/10/Linear-Regression/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>

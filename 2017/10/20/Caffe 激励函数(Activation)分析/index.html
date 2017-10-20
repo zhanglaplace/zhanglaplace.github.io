@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
 <meta property="og:description" content="Caffe_Activation  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer 1.基本函数  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数1234567891011explicit XXXLayer(const Lay">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-20T15:31:00.943Z">
+<meta property="og:updated_time" content="2017-10-20T17:23:31.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe 激励层(Activation)分析">
 <meta name="twitter:description" content="Caffe_Activation  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer 1.基本函数  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数1234567891011explicit XXXLayer(const Lay">
@@ -425,6 +425,9 @@
 <pre><code>其他的激励函数就不在枚举，可以查看具体的caffe源码，实现大致相同
 </code></pre><h3 id="3-说明"><a href="#3-说明" class="headerlink" title="3.说明"></a>3.说明</h3><h4 id="1-梯度弥散和梯度爆炸"><a href="#1-梯度弥散和梯度爆炸" class="headerlink" title="(1) 梯度弥散和梯度爆炸"></a>(1) 梯度弥散和梯度爆炸</h4><p>  网络方向传播时，loss经过激励函数会有$loss*\partial{f(x)}$,而如sigmoid的函数，<br>max($\partial{f(x)}$)只有1/4因此深层网络传播时loss越来越小，则出现前层网络未完整学习而后层网络学习饱和的现象</p>
 <h4 id="2-Caffe激励层的构建"><a href="#2-Caffe激励层的构建" class="headerlink" title="(2) Caffe激励层的构建"></a>(2) Caffe激励层的构建</h4><p>  如上述的代码所示，激励层主要完成forward和Bacward的函数实现即可，由构建的函数表达式推导出它的导函数形式，弄懂bottom_data,top_data,bottom_diff,top_diff即可</p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接：  <a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20%E6%BF%80%E5%8A%B1%E5%87%BD%E6%95%B0(Activation)%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20/Caffe%20%E6%BF%80%E5%8A%B1%E5%87%BD%E6%95%B0(Activation)%E5%88%86%E6%9E%90/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>
