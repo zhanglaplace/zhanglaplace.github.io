@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="机器学习,统计学习方法," />
+  <meta name="keywords" content="Caffe,DeepLearning," />
 
 
 
@@ -97,20 +97,18 @@
 
 
 
-<meta name="description" content="Logistic回归分析$\qquad Logistic回归为概率型非线性回归模型，机器学习常用的二分类分类器，其表达式为:$ $\quad \quad z=w_{1}*x_{1}+w_{2}*x_{2}+\cdots +w_{n}*x_{n}+b=\sum_{i=0}^n w_{i}x_{i}  (其中 b等于w_{0}，x_{0}等于1)则:$">
-<meta name="keywords" content="机器学习,统计学习方法">
+<meta name="description" content="Caffe_Loss  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度下能够影响最终网络学习的好坏。派生于LossLayer 1.基本函数主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数 1234567891011explicit XXXLossLayer(const LayerParameter&amp;a">
+<meta name="keywords" content="Caffe,DeepLearning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic回归分析">
-<meta property="og:url" content="http://yoursite.com/2017/09/07/logistic/index.html">
+<meta property="og:title" content="Caffe 激励层(Activation)分析">
+<meta property="og:url" content="http://yoursite.com/2017/10/20/Caffe Loss分析/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Logistic回归分析$\qquad Logistic回归为概率型非线性回归模型，机器学习常用的二分类分类器，其表达式为:$ $\quad \quad z=w_{1}*x_{1}+w_{2}*x_{2}+\cdots +w_{n}*x_{n}+b=\sum_{i=0}^n w_{i}x_{i}  (其中 b等于w_{0}，x_{0}等于1)则:$">
+<meta property="og:description" content="Caffe_Loss  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度下能够影响最终网络学习的好坏。派生于LossLayer 1.基本函数主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数 1234567891011explicit XXXLossLayer(const LayerParameter&amp;a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images2017.cnblogs.com/blog/888534/201709/888534-20170908103015851-1635753052.png">
-<meta property="og:updated_time" content="2017-10-19T15:02:04.611Z">
+<meta property="og:updated_time" content="2017-10-20T09:49:20.404Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic回归分析">
-<meta name="twitter:description" content="Logistic回归分析$\qquad Logistic回归为概率型非线性回归模型，机器学习常用的二分类分类器，其表达式为:$ $\quad \quad z=w_{1}*x_{1}+w_{2}*x_{2}+\cdots +w_{n}*x_{n}+b=\sum_{i=0}^n w_{i}x_{i}  (其中 b等于w_{0}，x_{0}等于1)则:$">
-<meta name="twitter:image" content="http://images2017.cnblogs.com/blog/888534/201709/888534-20170908103015851-1635753052.png">
+<meta name="twitter:title" content="Caffe 激励层(Activation)分析">
+<meta name="twitter:description" content="Caffe_Loss  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度下能够影响最终网络学习的好坏。派生于LossLayer 1.基本函数主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数 1234567891011explicit XXXLossLayer(const LayerParameter&amp;a">
 
 
 
@@ -140,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/07/logistic/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/20/Caffe Loss分析/"/>
 
 
 
 
 
-  <title>Logistic回归分析 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Caffe 激励层(Activation)分析 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -317,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/07/logistic/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/Caffe Loss分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -334,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Logistic回归分析</h1>
+          <h1 class="post-title" itemprop="name headline">Caffe 激励层(Activation)分析</h1>
         
 
         <div class="post-meta">
@@ -346,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T20:03:49+08:00">
-                2017-09-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T11:16:01+08:00">
+                2017-10-20
               </time>
             
 
@@ -369,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/Caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">Caffe</span>
                   </a>
                 </span>
 
@@ -406,44 +404,12 @@
       
 
       
-        <h3 id="Logistic回归分析"><a href="#Logistic回归分析" class="headerlink" title="Logistic回归分析"></a>Logistic回归分析</h3><p>$\qquad Logistic回归为概率型非线性回归模型，机器学习常用的二分类分类器，其表达式为:$</p>
-<p>$\quad \quad z=w_{1}*x_{1}+w_{2}*x_{2}+\cdots +w_{n}*x_{n}+b=\sum_{i=0}^n w_{i}x_{i}  (其中 b等于w_{0}，x_{0}等于1)则:$<br><a id="more"></a><br>$$f(x) = \frac{1}{1+exp(-z)}$$</p>
-<p>$\quad \quad$即对于二分类，如果$f(x)\ge{0.5}$,则$x$属于第一类，即预测$y=1$，反之$x$属于第二类，预测$y=0$；样本的分布如下，其中，$C_1$表示第一个类别，$C_2$表示第二个类别，样本个数为$n$</p>
-<p>$$trainingData \quad\, x^1 \quad\, x^2 \quad\, x^3 \quad\,\cdots \quad\, x^n $$</p>
-<p>$\qquad \qquad \qquad \qquad \qquad \qquad labels \qquad   \quad  C_{1} \quad C_{1} \quad C_{2} \quad \cdots \quad C_{1} \\$<br>$\qquad$我们的目的是：对于类别为$1$的正样本$f_{w,b}(x)$ 尽可能大,而类别为$2$的负样本$f_{w,b}(x)$ 尽可能小,则我们需要最大化：$L(w,b)=f_{w,b}(x^1)f_{w,b}(x^2)(1-f_{w,b}(x^3))\cdots f_{w,b}(x^n)$来寻找最佳的$w$和$b$<br>$$<br>w^{*},b^{*} = arg\max\limits_{w,b}(L(w,b))\Longrightarrow w^{*},b^{*} = arg\min\limits_{w,b}(-ln{L(w,b)})<br>$$</p>
-<h3 id="随机梯度下降法"><a href="#随机梯度下降法" class="headerlink" title="随机梯度下降法"></a><a href="https://zh.wikipedia.org/zh-hans/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95" target="_blank" rel="external">随机梯度下降法</a></h3><p>$\qquad 我们需要优化的函数:-ln{L(w,b)} = -{ln{f_{w,b}(x^1)}+lnf_{w,b}(x^2)+ln(1-f_{w,b}(x^3))+\cdots lnf_{w,b}(x^n)}\quad \\$<br>$$<br>\qquad 假设：<br>\begin{cases}<br>\hat{y} = 1 \qquad x\in1 \\\<br>\\<br>\hat{y} = 0 \qquad  x\in0<br>\end{cases}<br>\qquad 已知\,f(x) = \frac{1}{1+exp(-z)}\quad z = \sum_{i=0}^n  w_{i}x_{i} 则<br>$$<br>$\qquad 我们需要优化的函数简化为：ln{L(w,b)} =\sum_{j=1}^{n}{\hat{y}^j\,lnf_{w,b}(x^j)+(1-\hat{y}^j)\,ln(1-f_{w,b}(x^j))} \\$</p>
-<p>$\qquad 当\,\,\hat{y}=1时\quad \hat{y}\,lnf_{w,b}(x)+(1-\hat y)\,ln(1-f_{w,b}(x)) = lnf_{w,b}(x) \\$<br>$\qquad 当\,\,\hat{y}=0时\quad \hat{y}\,lnf_{w,b}(x)+(1-\hat y)\,ln(1-f_{w,b}(x)) = ln(1-f_{w,b}(x)) \qquad \\$<br>$\qquad 即均满足上式 , 因此:$</p>
-<p>$\qquad \qquad \quad \frac{\partial lnL(w,b)}{\partial w_i}=\sum_{j=1}^{n}\hat{y}^j\frac{ \partial lnf_{w,b}(x^j) }{\partial w_i}+(1-\hat{y}^j)\frac{\partial (1-lnf_{w,b}(x^j))}{\partial w_i} \\$</p>
-<p>$\qquad \quad \quad 而 \, \frac{\partial lnf_{w,b}(x)}{\partial w_i}=\frac{\partial lnf_{w,b}(x)}{\partial z}*\frac{\partial z}{\partial w_i} \\$</p>
-<p>$\qquad \qquad \qquad \qquad \quad=\frac{1}{f_{w,b}(x)}* \frac{\partial f_{w,b}(x)}{\partial z}*x_i \\$</p>
-<p>$\qquad \qquad \qquad \qquad \quad=\frac{1}{f_{w,b}(x)}*f_{w,b}(x)*(1-f_{w,b}(x))*x_i \\$</p>
-<p>$\qquad \qquad \qquad \qquad \quad=(1-f_{w,b}(x))*x_i \\$</p>
-<p>$\quad \quad 同理 \quad   \frac{\partial (1-lnf_{w,b}(x))}{\partial w_i}=f_{w,b}(x)*x_i \qquad 则化简后:\\$<br>$\qquad \quad\,\, \qquad \frac{\partial lnL(w,b)}{\partial w_i}=\sum_{j=1}^{n}\hat{y}^j\frac{ \partial lnf_{w,b}(x^j) }{\partial w_i}+(1-\hat{y}^j)\frac{\partial (1-lnf_{w,b}(x^j))}{\partial w_i} \\$</p>
-<p>$\qquad \qquad \qquad \quad \qquad = \sum_{j=1}^{n}{\hat{y}^j(1-f_{w,b}(x^j))x^j_i+(1-\hat{y}^j)*f_{w,b}(x^j)x^j_i} \\$</p>
-<p>$\qquad \qquad \quad\qquad \qquad = \sum_{j=1}^{n}(\hat{y}^j -f_{w,b}(x^j))x^j_i \\$</p>
-<p>$\qquad b的推导与w的相似，可以得到w的更新迭代过程：w_{i} \leftarrow w_{i}-\alpha*\sum_{j=0}^{n}(\hat{y}^j-f_{w,b}(x^j))x^j_i \\$</p>
-<p><img src="http://images2017.cnblogs.com/blog/888534/201709/888534-20170908103015851-1635753052.png" alt=""></p>
-<h3 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h3><h4 id="1-为什么选用-crossEntropy-损失函数，而不用L2损失函数"><a href="#1-为什么选用-crossEntropy-损失函数，而不用L2损失函数" class="headerlink" title="1. 为什么选用$crossEntropy$损失函数，而不用L2损失函数"></a>1. 为什么选用$crossEntropy$损失函数，而不用L2损失函数</h4><p>$答:logistic不像linear \,\, regression使用L2损失函数的原因，主要是由于logistic的funcion的形式，\\$<br>$由于sigmoid函数的存在，如果logistic采取L2 loss时，损失函数为：\\$<br>$$\frac{\partial (f_{w,b}(x)-\hat{y})^2}{\partial w_i}=2(f_{w,b}(x)-\hat{y})f_{w,b}(x)(1-f_{w,b}(x))x_i $$<br>$则当\,\hat{y}=1, f_{w,b}(x) = 1 \quad 预测为1 ，即预测完全正确时 \quad loss=0 \quad  \\$<br>$但是当\,\hat{y}=1,f_{w,b}(x) = 0 \quad 预测为0 ，即预测完全错误时 \quad loss却依然为0 \quad显然不对 \\$</p>
-<h4 id="2-logistic-regression-的分类概率为什么选取了-sigmoid-函数"><a href="#2-logistic-regression-的分类概率为什么选取了-sigmoid-函数" class="headerlink" title="2. $logistic \,\,regression$的分类概率为什么选取了$sigmoid$函数"></a>2. <a href="https://www.zhihu.com/question/54707359" target="_blank" rel="external">$logistic \,\,regression$的分类概率为什么选取了$sigmoid$函数</a></h4><p>$答: 我们假设样本的分布服从二次高斯分布，即\\$</p>
-<p>$f_{\mu,\Sigma}(x) = \frac{1}{(2\pi)^{D/2}}\frac{1}{|\Sigma|^{1/2}}exp{-\frac{1}{2}(x-\mu)^T|\Sigma|^{-1}(x-\mu)},其中\mu为均值，\Sigma为协方差矩阵 \\$</p>
-<p>$输入为x，输出f_{\mu,\Sigma}(x)为样本x的概率密度，高斯分布的形状分布取决于均值\mu和协方差矩阵\Sigma, \\$<br>$因此需要求取最佳的高斯分布来满足样本的分布 \\$</p>
-<p>$$Maximum Likelihood : L(\mu,\Sigma) = f_{\mu,\Sigma}(x^1)f_{\mu,\Sigma}(x^2)f_{\mu,\Sigma}(x^3)\cdots\cdots f_{\mu,\Sigma}(x^{N})$$<br>$$\mu^{*}，\Sigma^{*} = arg\max\limits_{\mu,\Sigma}L(\mu,\Sigma)$$<br>$$\mu^{*} = \frac{1}{N}\sum_{i=0}^{N}{x^i}$$<br>$$\Sigma^{*} = \frac{1}{N}\sum_{i=0}^{N}{(x^i-\mu^{*})(x^i-\mu^{*})^T}$$</p>
-<p>$对于一个二分类，我们假设类别1的样本高斯分布的均值为\mu^1,类别2的样本的高斯分布均值为\mu^2,他们具有相同的协方差\Sigma \\$<br>$$\mu^1 = \sum_{i=1}^{n_1} x_i\qquad (x_i \in C_1) \quad ;\quad \mu^2 = \sum_{i=1}^{n_2} x_i\quad(x_i \in C_2) $$<br>$$\Sigma^1 = \sum_{i=1}^{n_1}(x_i-u^1)(x_i-u^1)^T ;\quad \Sigma^2 = \sum_{i=1}^{n_2}(x_i-u^2)(x_i-u^2)^T ;\quad \Sigma=\frac{n_1}{n_1+n_2}\Sigma^1+\frac{n_1}{n_1+n_2}\Sigma^2 $$</p>
-<p>$对于样本x，如果属于C_1则有：\\$</p>
-<p>$\qquad \qquad\qquad \qquad P(C_{1}|x) \,\,= \frac{P(C_{1},x)}{P(x)} \\$</p>
-<p>$\qquad \qquad\qquad \qquad \qquad \qquad =\frac{P(x|C_{1})*P(C_{1})}{P(x|C_{1})*P(C_{1})+P(x|C_{2})*P(C_{2})} \\$</p>
-<p>$\qquad \qquad\qquad \qquad \qquad \qquad =\frac{1}{1+\frac{P(x|C_{2})P(C_{2})}{P(x|C_{1})P(C_{1})}} \\$</p>
-<p>$\qquad \qquad\qquad \qquad \qquad \qquad =\frac{1}{1+exp(-\alpha)} \\$</p>
-<p>$其中\,\, \alpha= \ln(\frac{P(x|C_{1})*P(C_{1})}{P(x|C_{2})*P(C_{2})})$</p>
-<p>$将P(x|C_i)带入高斯分布的公式:\\$<br>$$P(C_1)=\frac{n_1}{n_1+n_2}\quad , \quad P(C_2)=\frac{n_2}{n_1+n_2} $$<br>$$P(x|C_1) = \frac{1}{(2\pi)^{D/2}}\frac{1}{|\Sigma|^{1/2}}exp{-\frac{1}{2}(x-\mu^1)^T|\Sigma|^{-1}(x-\mu^1)} $$<br>$$P(x|C_2) = \frac{1}{(2\pi)^{D/2}}\frac{1}{|\Sigma|^{1/2}}exp{-\frac{1}{2}(x-\mu^2)^T|\Sigma|^{-1}(x-\mu^2)} $$<br>$\alpha= lnP(x|C_1)-lnP(x|C_2)+ln\frac{P(C_1)}{P(C_2)} \\$<br>$\quad =-\frac{1}{2}(x-\mu^1)^T|\Sigma|^{-1}(x-\mu^1)-(-\frac{1}{2}(x-\mu^2)^T|\Sigma|^{-1}(x-\mu^2))+ln\frac{n_1}{n_2}\\$<br>$\quad =-\frac{1}{2}x^T(\Sigma)^{-1}x+(u^1)^T(\Sigma)^{-1}x-\frac{1}{2}(u^1)^T(\Sigma)^{-1}u^1+\frac{1}{2}x^T(\Sigma)^{-1}x-(u^2)^T(\Sigma)^{-1}x+\frac{1}{2}(u^2)^T(\Sigma)^{-1}u^2+ln\frac{n_1}{n_2}\\$<br>$\quad = (u^1-u^2)^T(\Sigma)^{-1}x-\frac{1}{2}(u^1)^T(\Sigma)^{-1}u^1+\frac{1}{2}(u^2)^T(\Sigma)^{-1}u^2+ln\frac{n_1}{n_2}\\$<br>$\quad = wx+b\\$<br>$\quad w = (u^1-u^2)^T(\Sigma)^{-1} \quad ; \quad b=-\frac{1}{2}(u^1)^T(\Sigma)^{-1}u^1+\frac{1}{2}(u^2)^T(\Sigma)^{-1}u^2+ln\frac{n_1}{n_2}\\$<br>$\quad 因此可以得到对于满足猜想的二次高斯分布的datasets，生成模型的分类表达式与logistic是一致的 \\$</p>
-<h3 id="生成模型与判别模型"><a href="#生成模型与判别模型" class="headerlink" title="生成模型与判别模型"></a>生成模型与判别模型</h3><h4 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h4><pre><code>基于现有的样本，对样本分布做了一个猜测（极大似然），因此当数据集较少，或者有噪声的时候，
-</code></pre><p>都能达到一个较好的结果(不过分依赖于实际样本),并且可以根据不同的概率model完成样本分布的gauss</p>
-<h4 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h4><pre><code>基于决策的方式（判别式），通过优化方法(sgd)寻找最优参数，对样本的依赖大，样本充足时，其
-</code></pre><p>效果一般比生成模型好(基于事实 not 基于猜测)</p>
-<h3 id="小扩展"><a href="#小扩展" class="headerlink" title="小扩展"></a>小扩展</h3><h4 id="多分类"><a href="#多分类" class="headerlink" title="多分类"></a>多分类</h4><pre><code>基于先验概率得出的每个类别的后验概率为softmax函数，即：
-</code></pre><p>$\\$<br>$\qquad \qquad \qquad \qquad \, P(C_i|x) = \frac{P(x|C_i)P(C_i)}{\sum_{j=1}^{n}P(x|C_j)P(C_j)}\\$</p>
-<p>$\qquad \qquad \qquad \qquad \qquad \qquad = \frac{exp(a_k)}{\sum_{j=1}^{n}a_j}\\$</p>
-<h4 id="待续"><a href="#待续" class="headerlink" title="待续"></a>待续</h4><p>未完待续</p>
+        <h3 id="Caffe-Loss"><a href="#Caffe-Loss" class="headerlink" title="Caffe_Loss"></a>Caffe_Loss</h3><p>  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度<br>下能够影响最终网络学习的好坏。派生于LossLayer</p>
+<h4 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1.基本函数"></a>1.基本函数</h4><pre><code>主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数
+</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">explicit XXXLossLayer(const LayerParameter&amp; param):LossLayer&lt;Dtype&gt;(param),diff_() &#123;&#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Reshape</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="2-常用损失函数"><a href="#2-常用损失函数" class="headerlink" title="2.常用损失函数"></a>2.常用损失函数</h4><pre><code>由于训练中，采用mini_batch的模式
+</code></pre><h5 id="1-EuclideanLoss-欧式损失函数，L2损失"><a href="#1-EuclideanLoss-欧式损失函数，L2损失" class="headerlink" title="(1) EuclideanLoss (欧式损失函数，L2损失)"></a>(1) EuclideanLoss (欧式损失函数，L2损失)</h5><p>  $EuclideanLoss$的公式表达为 $loss = \frac{1}{2n}\sum_{i=1}^n{(y_{i}-\hat{y}_{i})^2}$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> EuclideanLossLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -461,9 +427,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="/tags/Caffe/" rel="tag"># Caffe</a>
           
-            <a href="/tags/统计学习方法/" rel="tag"># 统计学习方法</a>
+            <a href="/tags/DeepLearning/" rel="tag"># DeepLearning</a>
           
         </div>
       
@@ -476,14 +442,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/19/Caffe_Net/" rel="next" title="Caffe Net分析">
+                <i class="fa fa-chevron-left"></i> Caffe Net分析
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/08/C++随笔/" rel="prev" title="C++随笔">
-                C++随笔 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/20/Caffe 激励函数(Activation)分析/" rel="prev" title="Caffe 激励层(Activation)分析">
+                Caffe 激励层(Activation)分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -636,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic回归分析"><span class="nav-number">1.</span> <span class="nav-text">Logistic回归分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降法"><span class="nav-number">2.</span> <span class="nav-text">随机梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考题"><span class="nav-number">3.</span> <span class="nav-text">思考题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-为什么选用-crossEntropy-损失函数，而不用L2损失函数"><span class="nav-number">3.1.</span> <span class="nav-text">1. 为什么选用$crossEntropy$损失函数，而不用L2损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-logistic-regression-的分类概率为什么选取了-sigmoid-函数"><span class="nav-number">3.2.</span> <span class="nav-text">2. $logistic \,\,regression$的分类概率为什么选取了$sigmoid$函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成模型与判别模型"><span class="nav-number">4.</span> <span class="nav-text">生成模型与判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成模型"><span class="nav-number">4.1.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别模型"><span class="nav-number">4.2.</span> <span class="nav-text">判别模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小扩展"><span class="nav-number">5.</span> <span class="nav-text">小扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多分类"><span class="nav-number">5.1.</span> <span class="nav-text">多分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#待续"><span class="nav-number">5.2.</span> <span class="nav-text">待续</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe-Loss"><span class="nav-number">1.</span> <span class="nav-text">Caffe_Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本函数"><span class="nav-number">1.1.</span> <span class="nav-text">1.基本函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-常用损失函数"><span class="nav-number">1.2.</span> <span class="nav-text">2.常用损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-EuclideanLoss-欧式损失函数，L2损失"><span class="nav-number">1.2.1.</span> <span class="nav-text">(1) EuclideanLoss (欧式损失函数，L2损失)</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
