@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
 <meta property="og:description" content="Caffe_Loss  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度下能够影响最终网络学习的好坏。派生于 $LossLayer$,根据不同的Loss层有不同的参数; 1.基本函数主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数 123456789101112explicit XXXLossLayer">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-21T08:15:52.179Z">
+<meta property="og:updated_time" content="2017-10-21T09:53:16.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe Loss分析">
 <meta name="twitter:description" content="Caffe_Loss  损失函数为深度学习中重要的一个组成部分，各种优化算法均是基于Loss来的，损失函数的设计好坏很大程度下能够影响最终网络学习的好坏。派生于 $LossLayer$,根据不同的Loss层有不同的参数; 1.基本函数主要包含构造函数，前向、后向以及Reshape，部分有SetUp的函数，每层都有Loss参数 123456789101112explicit XXXLossLayer">
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,050 字
+                  2,051 字
                 </span>
               
 
@@ -458,7 +458,7 @@
 <h5 id="3-SmoothL1Loss-RCNN后提出的Loss"><a href="#3-SmoothL1Loss-RCNN后提出的Loss" class="headerlink" title="(3) SmoothL1Loss (RCNN后提出的Loss)"></a>(3) SmoothL1Loss (RCNN后提出的Loss)</h5><pre><code>SmoothL1Loss为欧式均方误差的修改版，为分段函数，对离散点不敏感,具体的公式如下:
 </code></pre><p>$$<br>SmoothL1Loss(x) =<br>\begin{cases}<br>  0.5<em>(sigma</em>x)^2 \qquad 其他<br>\\<br>  \left|x\right|-0.5/sigma^2 \qquad \left|x\right| &lt; 1./sigma^2<br>\end{cases}<br>$$<br>整体的公式为:$x_{new} = x_{input}<em>w_{in},output = w_{out}</em>SmoothL1loss(x_{new});$<br>1.基本的数据类型和意义:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Blob&lt;Dtype&gt; diff_;<span class="comment">// y_</span></div><div class="line">Blob&lt;Dtype&gt; error_;<span class="comment">//loss</span></div><div class="line">Blob&lt;Dtype&gt; ones_;</div><div class="line"><span class="keyword">bool</span> has_weights_; <span class="comment">// weight权值</span></div><div class="line">Dtype sigma2_ ;<span class="comment">// sigma 默认为1，此处sigma2_ = sigma*simga;</span></div></pre></td></tr></table></figure></p>
 <ol>
-<li>基本的功能函数<br> 基本包含了LayerSetup Reshape Forward 和 Backward四个函数,具体实现如下<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构建layer层次,SmoothL1LossLayer的参数有sigma，默认为1</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> SmoothL1LossLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;bottom,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    SmoothL1LossParameter loss_param = <span class="keyword">this</span>-&gt;layer_param_.smooth_l1_loss_param();</div><div class="line">    sigma2_ = loss_param.sigma()*loss_param.sigma();</div><div class="line">    has_weights_ = (bottom.size() &gt;= <span class="number">3</span>);<span class="comment">//bottom[3]---为weights</span></div><div class="line">    <span class="keyword">if</span> (has_weights_) &#123;</div><div class="line">        <span class="comment">//bottom[3] == out_weight;//w_out</span></div><div class="line">        <span class="comment">//bottom[2] == in_weight;// w_in</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Reshape 根据输入输出调节结构</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> SmoothL1LossLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;</div><div class="line">    bottom,<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    LossLayer&lt;Dtype&gt;::Reshape(bottom,top);<span class="comment">//基函数</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>基本的功能函数<br> 基本包含了LayerSetup Reshape Forward 和 Backward四个函数,具体实现如下<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//构建layer层次,SmoothL1LossLayer的参数有sigma，默认为1</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> SmoothL1LossLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;bottom,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    SmoothL1LossParameter loss_param = <span class="keyword">this</span>-&gt;layer_param_.smooth_l1_loss_param();</div><div class="line">    sigma2_ = loss_param.sigma()*loss_param.sigma();</div><div class="line">    has_weights_ = (bottom.size() &gt;= <span class="number">3</span>);<span class="comment">//bottom[3]---为weights</span></div><div class="line">    <span class="keyword">if</span> (has_weights_) &#123;</div><div class="line">        <span class="comment">//bottom[3] == out_weight;//w_out</span></div><div class="line">        <span class="comment">//bottom[2] == in_weight;// w_in</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Reshape 根据输入输出调节结构</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> SmoothL1LossLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;</div><div class="line">    bottom,<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    LossLayer&lt;Dtype&gt;::Reshape(bottom,top);<span class="comment">//基函数</span></div><div class="line">    <span class="comment">//forward</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <blockquote>
@@ -525,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/20/Caffe 激励函数(Activation)分析/" rel="next" title="Caffe 激励层(Activation)分析">
-                <i class="fa fa-chevron-left"></i> Caffe 激励层(Activation)分析
+              <a href="/2017/10/19/Caffe_Net/" rel="next" title="Caffe Net分析">
+                <i class="fa fa-chevron-left"></i> Caffe Net分析
               </a>
             
           </div>
@@ -534,6 +534,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/20/Caffe 激励函数(Activation)分析/" rel="prev" title="Caffe 激励层(Activation)分析">
+                Caffe 激励层(Activation)分析 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
