@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能参差，常见的包含$concat,slice,split,crop,flip,scale _layer$等,这些参差在网络中被经常使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer(1) crop_layer  $cropLayer$完成数据的$crop$操作$layerparam$包含了$axi">
+<meta name="description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer$(1)cropLayer$  $cropLayer$完成数据的$crop$操作,$layerparam$包">
 <meta name="keywords" content="Caffe,DeepLearning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Caffe CommonLayer分析">
 <meta property="og:url" content="http://www.enjoyai.site/2017/10/22/Caffe CommonLayer分析/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能参差，常见的包含$concat,slice,split,crop,flip,scale _layer$等,这些参差在网络中被经常使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer(1) crop_layer  $cropLayer$完成数据的$crop$操作$layerparam$包含了$axi">
+<meta property="og:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer$(1)cropLayer$  $cropLayer$完成数据的$crop$操作,$layerparam$包">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-22T08:57:38.899Z">
+<meta property="og:updated_time" content="2017-10-22T09:07:06.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe CommonLayer分析">
-<meta name="twitter:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能参差，常见的包含$concat,slice,split,crop,flip,scale _layer$等,这些参差在网络中被经常使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer(1) crop_layer  $cropLayer$完成数据的$crop$操作$layerparam$包含了$axi">
+<meta name="twitter:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer$(1)cropLayer$  $cropLayer$完成数据的$crop$操作,$layerparam$包">
 
 
 
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  86 字
+                  83 字
                 </span>
               
 
@@ -446,8 +446,8 @@
       
 
       
-        <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能参差，常见的包含$concat,slice,split,crop,flip,scale _layer$等,这些参差在网络中被经常使用，本文也将对其中的常见layer进行说明与源码分析。</p>
-<h4 id="1-常用Layer"><a href="#1-常用Layer" class="headerlink" title="1.常用Layer"></a>1.常用Layer</h4><h5 id="1-crop-layer"><a href="#1-crop-layer" class="headerlink" title="(1) crop_layer"></a>(1) crop_layer</h5><p>  $cropLayer$完成数据的$crop$操作$layerparam$包含了$axis$于$offset$。</p>
+        <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。</p>
+<h4 id="1-常用Layer"><a href="#1-常用Layer" class="headerlink" title="1.常用Layer"></a>1.常用Layer</h4><h5 id="1-cropLayer"><a href="#1-cropLayer" class="headerlink" title="$(1)cropLayer$"></a>$(1)cropLayer$</h5><p>  $cropLayer$完成数据的$crop$操作,$layerparam$包含了$axis$与$offset$参数。</p>
 
       
     </div>
@@ -677,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe-CommonLayer分析"><span class="nav-number">1.</span> <span class="nav-text">Caffe CommonLayer分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-常用Layer"><span class="nav-number">1.1.</span> <span class="nav-text">1.常用Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-crop-layer"><span class="nav-number">1.1.1.</span> <span class="nav-text">(1) crop_layer</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe-CommonLayer分析"><span class="nav-number">1.</span> <span class="nav-text">Caffe CommonLayer分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-常用Layer"><span class="nav-number">1.1.</span> <span class="nav-text">1.常用Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-cropLayer"><span class="nav-number">1.1.1.</span> <span class="nav-text">$(1)cropLayer$</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

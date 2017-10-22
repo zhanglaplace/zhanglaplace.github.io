@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Caffe CommonLayer分析]]></title>
     <url>%2F2017%2F10%2F22%2FCaffe%20CommonLayer%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[Caffe CommonLayer分析 $Caffe$中包含了很多通用的功能参差，常见的包含$concat,slice,split,crop,flip,scale _layer$等,这些参差在网络中被经常使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer(1) crop_layer $cropLayer$完成数据的$crop$操作$layerparam$包含了$axis$于$offset$。]]></content>
+    <content type="text"><![CDATA[Caffe CommonLayer分析 $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用Layer$(1)cropLayer$ $cropLayer$完成数据的$crop$操作,$layerparam$包含了$axis$与$offset$参数。]]></content>
       <categories>
         <category>Caffe</category>
       </categories>
