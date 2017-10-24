@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.enjoyai.site/2017/10/20/Caffe%20VisionLayer%E5%88%86%E6%9E%90/</loc>
+    
+    <lastmod>2017-10-24T14:35:43.238Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.enjoyai.site/2017/10/22/Caffe%20CommonLayer%E5%88%86%E6%9E%90/</loc>
     
     <lastmod>2017-10-24T14:33:31.923Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://www.enjoyai.site/2017/10/20/Caffe%20%E6%BF%80%E5%8A%B1%E5%87%BD%E6%95%B0(Activation)%E5%88%86%E6%9E%90/</loc>
     
     <lastmod>2017-10-24T14:28:06.536Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.enjoyai.site/2017/10/20/Caffe%20VisionLayer%E5%88%86%E6%9E%90/</loc>
-    
-    <lastmod>2017-10-24T14:17:42.237Z</lastmod>
     
   </url>
   
