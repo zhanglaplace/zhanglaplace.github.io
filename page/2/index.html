@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Caffe,DeepLearning," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -97,18 +97,16 @@
 
 
 
-<meta name="description" content="Caffe_NeuronLayer  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer 1.基本函数  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数1234567891011explicit XXXLayer(const La">
-<meta name="keywords" content="Caffe,DeepLearning">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Caffe NeuronLayer分析">
-<meta property="og:url" content="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/index.html">
+<meta name="description" content="明德厚学 求是创新">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZhangFeng&#39;s Blog">
+<meta property="og:url" content="http://www.enjoyai.site/page/2/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Caffe_NeuronLayer  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer 1.基本函数  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数1234567891011explicit XXXLayer(const La">
+<meta property="og:description" content="明德厚学 求是创新">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-24T14:28:06.536Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caffe NeuronLayer分析">
-<meta name="twitter:description" content="Caffe_NeuronLayer  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer 1.基本函数  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数1234567891011explicit XXXLayer(const La">
+<meta name="twitter:title" content="ZhangFeng&#39;s Blog">
+<meta name="twitter:description" content="明德厚学 求是创新">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/"/>
+  <link rel="canonical" href="http://www.enjoyai.site/page/2/"/>
 
 
 
 
 
-  <title>Caffe NeuronLayer分析 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -163,7 +161,8 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -300,9 +299,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -315,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/09/07/logistic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -332,7 +331,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Caffe NeuronLayer分析</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/07/logistic/" itemprop="url">Logistic回归分析</a></h1>
         
 
         <div class="post-meta">
@@ -344,8 +345,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T11:16:01+08:00">
-                2017-10-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T20:03:49+08:00">
+                2017-09-07
               </time>
             
 
@@ -367,8 +368,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -384,7 +385,7 @@
 
           
           
-             <span id="/2017/10/20/Caffe 激励函数(Activation)分析/" class="leancloud_visitors" data-flag-title="Caffe NeuronLayer分析">
+             <span id="/2017/09/07/logistic/" class="leancloud_visitors" data-flag-title="Logistic回归分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -409,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,180 字
+                  1,896 字
                 </span>
               
 
@@ -425,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -446,20 +447,17 @@
       
 
       
-        <h3 id="Caffe-NeuronLayer"><a href="#Caffe-NeuronLayer" class="headerlink" title="Caffe_NeuronLayer"></a>Caffe_NeuronLayer</h3><p>  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer<dtype></dtype></p>
-<h4 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1.基本函数"></a>1.基本函数</h4><p>  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">XXXLayer</span><span class="params">(<span class="keyword">const</span> LayerParameter&amp; param)</span></span></div><div class="line">        :NeuronLayer&lt;Dtype&gt;(param)&#123;&#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="string">"layerNane"</span>; &#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<h4 id="2-常用-Neuron-层"><a href="#2-常用-Neuron-层" class="headerlink" title="2.常用$Neuron$层"></a>2.常用$Neuron$层</h4><h5 id="1-Relu-PRelu-Rectufied-Linear-Units"><a href="#1-Relu-PRelu-Rectufied-Linear-Units" class="headerlink" title="(1) Relu/PRelu Rectufied Linear Units"></a>(1) Relu/PRelu Rectufied Linear Units</h5><p>   ReLU的函数表达式为 $f(x) = x*(x&gt;0) + negative_slope*x*(x &lt;= 0)$ 具体实现如下<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//forward_cpu</span></div><div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">  <span class="keyword">void</span> ReLULayer&lt;Dtype&gt;::Forward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">      <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123; <span class="comment">// 根据bottom求解top</span></div><div class="line">      <span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>]-&gt;cpu_data();<span class="comment">//const 不可修饰</span></div><div class="line">      Dtype* top_data = top[<span class="number">0</span>]-&gt;mutable_cpu_data();<span class="comment">//可修饰</span></div><div class="line">      <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>]-&gt;count();<span class="comment">//因为count_一致，也可用top</span></div><div class="line">      Dtype negative_slope = <span class="keyword">this</span>-&gt;layer_param_.relu_param().negative_slope();</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">         top_data[i] = bottom_data[i]*(bottom_data[i] &gt; <span class="number">0</span>)</div><div class="line">                    + negative_slope*bottom_data[i]*(bottom_data[i] &lt;= <span class="number">0</span>);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"></div><div class="line">  <span class="comment">//Backward_cpu</span></div><div class="line">  <span class="comment">// 导数形式 f'(x) = 1 x&gt;0 ; negative_slope*x x&lt;0</span></div><div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">  <span class="keyword">void</span> ReLULayer&lt;Dtype&gt;::Backward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</div><div class="line">      <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down,<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)&#123;</div><div class="line">      <span class="keyword">const</span> Dtype* top_diff = top[<span class="number">0</span>].cpu_diff();<span class="comment">//top diff</span></div><div class="line">      <span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>].cpu_data();<span class="comment">//用以判断x是否大于0</span></div><div class="line">      Dtype* bottom_diff = bottom[<span class="number">0</span>].cpu_diff();<span class="comment">//bottom diff</span></div><div class="line">      <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>].count();</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">         bottom_diff[i] = top_diff[i]*(bottom_data[i] &gt; <span class="number">0</span>)</div><div class="line">                    +negative_slope*(bottom_data[i] &lt;= <span class="number">0</span>);</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="comment">// Relu 函数形式简单，导函数简单，能有效的解决梯度弥散问题，但是当x小于0时，易碎</span></div><div class="line"><span class="comment">// 但是网络多为多神经元，所以实际应用中不会影响到网络的正常训练。</span></div></pre></td></tr></table></figure></p>
-<h5 id="2-Sigmoid-S曲线"><a href="#2-Sigmoid-S曲线" class="headerlink" title="(2) Sigmoid (S曲线)"></a>(2) Sigmoid (S曲线)</h5><p>   Sigmoid函数表达式为$f(x) = 1./(1+exp(-x))$;值域0-1，常作为BP神经网络的激活函数<br>由于输出为0-1，也作为logistic回归分析的概率输出函数。具体实现如下;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">    <span class="comment">//定义一个sigmoid函数方便计算</span></div><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">    <span class="function"><span class="keyword">inline</span> Dtype <span class="title">sigmoid</span><span class="params">(Dtype x)</span></span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="number">1.</span>/(<span class="number">1.</span>+<span class="built_in">exp</span>(-x));</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//前向 直接带入sigmoid函数即可</span></div><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">    <span class="keyword">void</span> SigmoidLayer&lt;Dtype&gt;::Forward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">        <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">        <span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">        Dtype* top_data = top[<span class="number">0</span>]-&gt;mutable_cpu_data();<span class="comment">//需要计算</span></div><div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>]-&gt;count();<span class="comment">//N*C*H*W;</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">           top_data[i] = sigmoid(bottom_data[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//Backward_cpu 由于f'(x) = f(x)*(1-f(x))，所以需要top_data</span></div><div class="line">    <span class="comment">// bottom_diff = top_diff*f'(bottom_data) = top_diff*top_data*(1-top_data)</span></div><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">    <span class="keyword">void</span> SigmoidLayer&lt;Dtype&gt;::Backward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</div><div class="line">        <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down,<span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)&#123;</div><div class="line">        <span class="keyword">const</span> Dtype* top_diff = top[<span class="number">0</span>]-&gt;cpu_diff();</div><div class="line">        <span class="keyword">const</span> Dtype* top_data = top[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">        Dtype* bottom_diff = bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff(); <span class="comment">//需要计算</span></div><div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>]-&gt;count();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">            <span class="comment">//top_data[i] == sigmoid(bottom_data[i]);</span></div><div class="line">            bottom_diff[i] = top_diff[i]*top_data[i]*(<span class="number">1.</span>-top_data[i]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">// Sigmoid函数可以作为二分类的概率输出，也可以作为激活函数完成非线性映射，但是网络</span></div><div class="line"><span class="comment">// 增加时，容易出现梯度弥散问题，目前在CNN中基本不使用</span></div></pre></td></tr></table></figure></p>
-<h5 id="3-TanH-双正切函数"><a href="#3-TanH-双正切函数" class="headerlink" title="(3)TanH,双正切函数"></a>(3)TanH,双正切函数</h5><p>  TanH函数的表达式为 $f(x) =\frac{(1.-exp(-2x))}{(1.+exp(-2x))}$;值域0-1,与sigmoid函数有相同的问题,<br>但是TanH在RNN中使用较为广泛,<a href="https://www.zhihu.com/question/61265076/answer/186644426" target="_blank" rel="external">理由参考</a>，具体实现如下所示。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个tanH的函数表达式,实际已经封装</span></div><div class="line"><span class="function"><span class="keyword">inline</span> Dtype <span class="title">TanH</span><span class="params">(Dtype x)</span></span>&#123;</div><div class="line">   <span class="keyword">return</span> (<span class="number">1.</span>-<span class="built_in">exp</span>(<span class="number">-2</span>*x))/(<span class="number">1.</span>+<span class="built_in">exp</span>(<span class="number">-2</span>*x));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Forward_cpu</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> TanHLayer&lt;Dtype&gt;::Forward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">    <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    <span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">    Dtype* top_data = top[<span class="number">0</span>]-&gt;mutable_cpu_data();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>]-&gt;count();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">        top[i] = TanH(bottom_data[i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Backward_cpu f'(x) = 1-f(x)*f(x);</span></div><div class="line"><span class="comment">// bottom_diff = top_diff(1-top_data*top_data);</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> TanHLayer&lt;Dtype&gt;::Backward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</div><div class="line">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down,<span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)&#123;</div><div class="line">    <span class="keyword">const</span> Dtype* top_diff = top[<span class="number">0</span>]-&gt;cpu_diff();</div><div class="line">    <span class="keyword">const</span> Dtype* top_data = top[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">    Dtype* bottom_diff = bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff(); <span class="comment">//需要计算</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> count = bottom[<span class="number">0</span>]-&gt;count();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">        <span class="comment">//top_data[i] == TanH(bottom_data[i]);</span></div><div class="line">        bottom_diff[i] = top_diff[i]*(<span class="number">1.</span>-top_data[i]*top_data[i]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<pre><code>其他的激励函数就不在枚举，可以查看具体的caffe源码，实现大致相同
-</code></pre><h3 id="3-说明"><a href="#3-说明" class="headerlink" title="3.说明"></a>3.说明</h3><h4 id="1-梯度弥散和梯度爆炸"><a href="#1-梯度弥散和梯度爆炸" class="headerlink" title="(1) 梯度弥散和梯度爆炸"></a>(1) 梯度弥散和梯度爆炸</h4><p>  网络方向传播时，loss经过激励函数会有$loss*\partial{f(x)}$,而如sigmoid的函数，<br>max($\partial{f(x)}$)只有1/4因此深层网络传播时loss越来越小，则出现前层网络未完整学习而后层网络学习饱和的现象</p>
-<h4 id="2-Caffe激励层的构建"><a href="#2-Caffe激励层的构建" class="headerlink" title="(2) Caffe激励层的构建"></a>(2) Caffe激励层的构建</h4><p>  如上述的代码所示，激励层主要完成forward和Bacward的函数实现即可，由构建的函数表达式推导出它的导函数形式，弄懂bottom_data,top_data,bottom_diff,top_diff即可</p>
-<blockquote>
-<p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20%E6%BF%80%E5%8A%B1%E5%87%BD%E6%95%B0(Activation" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a>%E5%88%86%E6%9E%90/)<br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
-</blockquote>
-
+        
+          <h3 id="Logistic回归分析"><a href="#Logistic回归分析" class="headerlink" title="Logistic回归分析"></a>Logistic回归分析</h3><p>$\qquad Logistic回归为概率型非线性回归模型，机器学习常用的二分类分类器，其表达式为:$</p>
+<p>$\quad \quad z=w_{1}*x_{1}+w_{2}*x_{2}+\cdots +w_{n}*x_{n}+b=\sum_{i=0}^n w_{i}x_{i}  (其中 b等于w_{0}，x_{0}等于1)则:$<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/07/logistic/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
       
     </div>
     
@@ -469,76 +467,19 @@
     
 
     
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay1.jpg" alt="ZhangLaplace 微信支付"/>
-        <p>微信支付</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay1.jpg" alt="ZhangLaplace 支付宝"/>
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
 
     
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Caffe/" rel="tag"># Caffe</a>
-          
-            <a href="/tags/DeepLearning/" rel="tag"># DeepLearning</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/10/19/Caffe_Net/" rel="next" title="Caffe Net分析">
-                <i class="fa fa-chevron-left"></i> Caffe Net分析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/20/Caffe Loss分析/" rel="prev" title="Caffe Loss分析">
-                Caffe Loss分析 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -548,11 +489,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -560,12 +504,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame"></div>
-    
-  </div>
-
 
         </div>
         
@@ -586,17 +524,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -682,22 +611,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe-NeuronLayer"><span class="nav-number">1.</span> <span class="nav-text">Caffe_NeuronLayer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本函数"><span class="nav-number">1.1.</span> <span class="nav-text">1.基本函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-常用-Neuron-层"><span class="nav-number">1.2.</span> <span class="nav-text">2.常用$Neuron$层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Relu-PRelu-Rectufied-Linear-Units"><span class="nav-number">1.2.1.</span> <span class="nav-text">(1) Relu/PRelu Rectufied Linear Units</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Sigmoid-S曲线"><span class="nav-number">1.2.2.</span> <span class="nav-text">(2) Sigmoid (S曲线)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-TanH-双正切函数"><span class="nav-number">1.2.3.</span> <span class="nav-text">(3)TanH,双正切函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-说明"><span class="nav-number">2.</span> <span class="nav-text">3.说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-梯度弥散和梯度爆炸"><span class="nav-number">2.1.</span> <span class="nav-text">(1) 梯度弥散和梯度爆炸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Caffe激励层的构建"><span class="nav-number">2.2.</span> <span class="nav-text">(2) Caffe激励层的构建</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -825,10 +738,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
-
-
 
   
 
@@ -854,10 +763,6 @@
   
     
 
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146997"></script>
-      <!-- UY END -->
     
   
 
