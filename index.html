@@ -314,6 +314,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/30/Paper阅读总结 Day1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/30/Paper阅读总结 Day1/" itemprop="url">Paper阅读总结Day1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T14:16:01+08:00">
+                2017-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Facial-Expression/" itemprop="url" rel="index">
+                    <span itemprop="name">Facial Expression</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/30/Paper阅读总结 Day1/" class="leancloud_visitors" data-flag-title="Paper阅读总结Day1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  658 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Paper阅读总结Day1"><a href="#Paper阅读总结Day1" class="headerlink" title="Paper阅读总结Day1"></a>Paper阅读总结Day1</h1><h2 id="Convolutional-Neural-Networks-For-Facial-Expression-Recognition"><a href="#Convolutional-Neural-Networks-For-Facial-Expression-Recognition" class="headerlink" title="Convolutional Neural Networks For Facial Expression Recognition"></a>Convolutional Neural Networks For Facial Expression Recognition</h2><h3 id="文章思想"><a href="#文章思想" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。</p>
+<h3 id="文章使用数据集"><a href="#文章使用数据集" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  Fer2013 Database，通过浅层次和深层次的横向对比与 加入hog与不加hog的横向对比</p>
+<h3 id="实验效果与结论"><a href="#实验效果与结论" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  深层次的CNN准确率大概是65%，加入HOG与不加效果基本一致，结论是否定了Hog特征融合对表情识别有效果的提升。</p>
+<h2 id="Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition"><a href="#Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition" class="headerlink" title="Island Loss for Learning Discriminative Features in Facial Expression Recognition"></a>Island Loss for Learning Discriminative Features in Facial Expression Recognition</h2><h3 id="文章思想-1"><a href="#文章思想-1" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的在centerLoss的基础上，添加了衡量各类别类心的loss，由于centerloss只关注了样本到类心的类内距离，而IslandLoss在关注类心距离的同时，添加了类间距离的loss，采用余弦距离衡量类心的相似程度。<br>$$\zeta = \zeta_S+\lambda (\zeta_C+\lambda_1\zeta_{is})$$</p>
+<h3 id="文章使用的数据集"><a href="#文章使用的数据集" class="headerlink" title="文章使用的数据集"></a>文章使用的数据集</h3><p>  Oulu-CASIA database 、 Extended Cokn-kanada和MMI database，fer2013</p>
+<h3 id="实验效果与结论-1"><a href="#实验效果与结论-1" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  在各个数据集上的表现都优于SoftmaxLoss以及 CenterLoss+SoftmaxLoss.需要把握各个loss的权重调节</p>
+<h2 id="End-to-End-Deep-Learning-for-Single-Step-Real-Time-Facial-Expression-Recognition"><a href="#End-to-End-Deep-Learning-for-Single-Step-Real-Time-Facial-Expression-Recognition" class="headerlink" title="End to End Deep Learning for Single Step Real-Time Facial Expression Recognition"></a>End to End Deep Learning for Single Step Real-Time Facial Expression Recognition</h2><h3 id="文章思想-2"><a href="#文章思想-2" class="headerlink" title="文章思想"></a>文章思想</h3><p>  实现一个集合人脸检测与人脸表情分类的一体的网络—Faster-RCNN。替换了Faster-RCNN前面的预训练的网络结构，采取了VGG16和ResNet50，做对比后VGG可以达到10fps，ResNet50-5fps，感觉略有水分。</p>
+<h3 id="文章使用数据集-1"><a href="#文章使用数据集-1" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  Extended Cokn-kanada 和 FER2013</p>
+<h3 id="实验效果与结论-2"><a href="#实验效果与结论-2" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  能够在CK+上10折达到94.7的Accuracy 10fps 实际使用基本不可能，RPN的人脸检测稳定性很低</p>
+<h2 id="Comparative-Study-of-Human-Age-Estimation-Based-on-Hand-Crafted-and-Deep-Face-Features"><a href="#Comparative-Study-of-Human-Age-Estimation-Based-on-Hand-Crafted-and-Deep-Face-Features" class="headerlink" title="Comparative Study of Human Age Estimation Based on Hand-Crafted and Deep Face Features"></a>Comparative Study of Human Age Estimation Based on Hand-Crafted and Deep Face Features</h2><h3 id="文章思想-3"><a href="#文章思想-3" class="headerlink" title="文章思想"></a>文章思想</h3><p>  自己提取的特征(LBP、Hog、BSIF)以后CNNs提取的特征(VGG-face、Image-VGG-F、VGG16、DEX-IMDB-WIKI and DEX-ChaLearn-ICCV2015 Features)，五个CNNs网络，有包含图像分类，人脸识别，目标检测与年龄预估。实际上就是特征做融合，然后用PLS regression 偏最小二乘法回归分析。</p>
+<h3 id="文章使用数据集-2"><a href="#文章使用数据集-2" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  MORPH和PAL database</p>
+<h3 id="实验效果与结论-3"><a href="#实验效果与结论-3" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  实验对比了几种特征单独的实验效果以及crop后的效果，实验说明了最后的回归很重要，然后CNN的特征比这些自己提取的特征好。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/24/Caffe VisionLayer分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2001,194 +2196,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/09/08/C++随笔/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/08/C++随笔/" itemprop="url">C++随笔</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T13:44:33+08:00">
-                2017-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/08/C++随笔/" class="leancloud_visitors" data-flag-title="C++随笔">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  472 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="重写，重定义、重载的区别"><a href="#重写，重定义、重载的区别" class="headerlink" title="重写，重定义、重载的区别"></a>重写，重定义、重载的区别</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/08/C++随笔/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2242,7 +2249,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2252,8 +2259,8 @@
             
             
             <div class="site-state-item site-state-categories">
-              <a href="/categories/index_back.html">
-                <span class="site-state-item-count">3</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2264,7 +2271,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

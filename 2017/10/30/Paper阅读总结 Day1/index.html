@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="机器学习," />
+  <meta name="keywords" content="DeepLearning,Facial Expression,Face Recognition," />
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Model and Cost Function(模型和损失函数)对于model，给出如下定义 $y = \theta x$损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$">
-<meta name="keywords" content="机器学习">
+<meta name="description" content="Paper阅读总结Day1Convolutional Neural Networks For Facial Expression Recognition文章思想  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。 文章">
+<meta name="keywords" content="DeepLearning,Facial Expression,Face Recognition">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linear Regression">
-<meta property="og:url" content="http://www.enjoyai.site/2017/09/10/Linear-Regression/index.html">
+<meta property="og:title" content="Paper阅读总结Day1">
+<meta property="og:url" content="http://www.enjoyai.site/2017/10/30/Paper阅读总结 Day1/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Model and Cost Function(模型和损失函数)对于model，给出如下定义 $y = \theta x$损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$">
+<meta property="og:description" content="Paper阅读总结Day1Convolutional Neural Networks For Facial Expression Recognition文章思想  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。 文章">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-20T17:26:47.210Z">
+<meta property="og:updated_time" content="2017-10-30T16:09:40.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linear Regression">
-<meta name="twitter:description" content="Model and Cost Function(模型和损失函数)对于model，给出如下定义 $y = \theta x$损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$">
+<meta name="twitter:title" content="Paper阅读总结Day1">
+<meta name="twitter:description" content="Paper阅读总结Day1Convolutional Neural Networks For Facial Expression Recognition文章思想  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。 文章">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://www.enjoyai.site/2017/09/10/Linear-Regression/"/>
+  <link rel="canonical" href="http://www.enjoyai.site/2017/10/30/Paper阅读总结 Day1/"/>
 
 
 
 
 
-  <title>Linear Regression | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Paper阅读总结Day1 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -315,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/09/10/Linear-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/30/Paper阅读总结 Day1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -332,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linear Regression</h1>
+          <h1 class="post-title" itemprop="name headline">Paper阅读总结Day1</h1>
         
 
         <div class="post-meta">
@@ -344,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T10:23:08+08:00">
-                2017-09-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T14:16:01+08:00">
+                2017-10-30
               </time>
             
 
@@ -367,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/Facial-Expression/" itemprop="url" rel="index">
+                    <span itemprop="name">Facial Expression</span>
                   </a>
                 </span>
 
@@ -384,7 +384,7 @@
 
           
           
-             <span id="/2017/09/10/Linear-Regression/" class="leancloud_visitors" data-flag-title="Linear Regression">
+             <span id="/2017/10/30/Paper阅读总结 Day1/" class="leancloud_visitors" data-flag-title="Paper阅读总结Day1">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  267 字
+                  658 字
                 </span>
               
 
@@ -425,7 +425,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -446,11 +446,18 @@
       
 
       
-        <h2 id="Model-and-Cost-Function-模型和损失函数"><a href="#Model-and-Cost-Function-模型和损失函数" class="headerlink" title="Model and Cost Function(模型和损失函数)"></a>Model and Cost Function(模型和损失函数)</h2><p>对于model，给出如下定义 $y = \theta x$<br>损失函数$J(\theta ): minimize\frac{1}{2m}\sum_{i=1}^{m}(h_{\theta}(x^i)-y^i)^2$<br><a id="more"></a><br>Gradient descent algorithm<br>repeat until convergence{<br>    $\quad \theta_j := \theta_j - \alpha\frac{\partial}{\partial \theta_j}J(\theta)$<br>}</p>
-<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>寻找两类样本正中间的划分超平面，因为该超平面对训练样本的布局扰动的容忍度最好，是最鲁棒的<br>划分超平面方程:<br>$$wx+b = 0$$<br>我们假使<br>$$<br>\begin{cases}<br>wx_i+b &gt;= 1 \qquad\quad y_i = +1 \\\<br>\\<br>wx_i+b &lt;=-1 \qquad\, y_i = -1<br>\end{cases}<br>$$<br>则距离超平面最近的几个点使得下列式子成立<br>$$\max\limits_{w,b}(\frac{2}{||w||}) \rightarrow \min_{w,b}\frac{1}{2}||w||^2$$<br>$$s.t. y_i(wx_i+b)\ge 1 i = 1,2,…,m.$$<br>通用表达式:<br>    $f(x)=w\psi(x)+b = \sum_{i=1}^{m}a_iy_i\psi(x_i)^T\psi(x)+b=\sum_{i=1}^{m}a_iy_i\kappa(x,x_i)+b$<br>$\kappa 为核函数.$</p>
-<blockquote>
-<p>本文作者： 张峰<br>本文链接： <a href="https://zhanglaplace.github.io/2017/09/10/Linear-Regression/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/09/10/Linear-Regression/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
-</blockquote>
+        <h1 id="Paper阅读总结Day1"><a href="#Paper阅读总结Day1" class="headerlink" title="Paper阅读总结Day1"></a>Paper阅读总结Day1</h1><h2 id="Convolutional-Neural-Networks-For-Facial-Expression-Recognition"><a href="#Convolutional-Neural-Networks-For-Facial-Expression-Recognition" class="headerlink" title="Convolutional Neural Networks For Facial Expression Recognition"></a>Convolutional Neural Networks For Facial Expression Recognition</h2><h3 id="文章思想"><a href="#文章思想" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。</p>
+<h3 id="文章使用数据集"><a href="#文章使用数据集" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  Fer2013 Database，通过浅层次和深层次的横向对比与 加入hog与不加hog的横向对比</p>
+<h3 id="实验效果与结论"><a href="#实验效果与结论" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  深层次的CNN准确率大概是65%，加入HOG与不加效果基本一致，结论是否定了Hog特征融合对表情识别有效果的提升。</p>
+<h2 id="Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition"><a href="#Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition" class="headerlink" title="Island Loss for Learning Discriminative Features in Facial Expression Recognition"></a>Island Loss for Learning Discriminative Features in Facial Expression Recognition</h2><h3 id="文章思想-1"><a href="#文章思想-1" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的在centerLoss的基础上，添加了衡量各类别类心的loss，由于centerloss只关注了样本到类心的类内距离，而IslandLoss在关注类心距离的同时，添加了类间距离的loss，采用余弦距离衡量类心的相似程度。<br>$$\zeta = \zeta_S+\lambda (\zeta_C+\lambda_1\zeta_{is})$$</p>
+<h3 id="文章使用的数据集"><a href="#文章使用的数据集" class="headerlink" title="文章使用的数据集"></a>文章使用的数据集</h3><p>  Oulu-CASIA database 、 Extended Cokn-kanada和MMI database，fer2013</p>
+<h3 id="实验效果与结论-1"><a href="#实验效果与结论-1" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  在各个数据集上的表现都优于SoftmaxLoss以及 CenterLoss+SoftmaxLoss.需要把握各个loss的权重调节</p>
+<h2 id="End-to-End-Deep-Learning-for-Single-Step-Real-Time-Facial-Expression-Recognition"><a href="#End-to-End-Deep-Learning-for-Single-Step-Real-Time-Facial-Expression-Recognition" class="headerlink" title="End to End Deep Learning for Single Step Real-Time Facial Expression Recognition"></a>End to End Deep Learning for Single Step Real-Time Facial Expression Recognition</h2><h3 id="文章思想-2"><a href="#文章思想-2" class="headerlink" title="文章思想"></a>文章思想</h3><p>  实现一个集合人脸检测与人脸表情分类的一体的网络—Faster-RCNN。替换了Faster-RCNN前面的预训练的网络结构，采取了VGG16和ResNet50，做对比后VGG可以达到10fps，ResNet50-5fps，感觉略有水分。</p>
+<h3 id="文章使用数据集-1"><a href="#文章使用数据集-1" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  Extended Cokn-kanada 和 FER2013</p>
+<h3 id="实验效果与结论-2"><a href="#实验效果与结论-2" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  能够在CK+上10折达到94.7的Accuracy 10fps 实际使用基本不可能，RPN的人脸检测稳定性很低</p>
+<h2 id="Comparative-Study-of-Human-Age-Estimation-Based-on-Hand-Crafted-and-Deep-Face-Features"><a href="#Comparative-Study-of-Human-Age-Estimation-Based-on-Hand-Crafted-and-Deep-Face-Features" class="headerlink" title="Comparative Study of Human Age Estimation Based on Hand-Crafted and Deep Face Features"></a>Comparative Study of Human Age Estimation Based on Hand-Crafted and Deep Face Features</h2><h3 id="文章思想-3"><a href="#文章思想-3" class="headerlink" title="文章思想"></a>文章思想</h3><p>  自己提取的特征(LBP、Hog、BSIF)以后CNNs提取的特征(VGG-face、Image-VGG-F、VGG16、DEX-IMDB-WIKI and DEX-ChaLearn-ICCV2015 Features)，五个CNNs网络，有包含图像分类，人脸识别，目标检测与年龄预估。实际上就是特征做融合，然后用PLS regression 偏最小二乘法回归分析。</p>
+<h3 id="文章使用数据集-2"><a href="#文章使用数据集-2" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  MORPH和PAL database</p>
+<h3 id="实验效果与结论-3"><a href="#实验效果与结论-3" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  实验对比了几种特征单独的实验效果以及crop后的效果，实验说明了最后的回归很重要，然后CNN的特征比这些自己提取的特征好。</p>
 
       
     </div>
@@ -497,7 +504,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="/tags/DeepLearning/" rel="tag"># DeepLearning</a>
+          
+            <a href="/tags/Facial-Expression/" rel="tag"># Facial Expression</a>
+          
+            <a href="/tags/Face-Recognition/" rel="tag"># Face Recognition</a>
           
         </div>
       
@@ -510,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/08/C++随笔/" rel="next" title="C++随笔">
-                <i class="fa fa-chevron-left"></i> C++随笔
+              <a href="/2017/10/24/Caffe VisionLayer分析/" rel="next" title="Caffe VisionLayer分析">
+                <i class="fa fa-chevron-left"></i> Caffe VisionLayer分析
               </a>
             
           </div>
@@ -519,10 +530,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/14/统计学习方法1-统计学习算法概述/" rel="prev" title="统计学习方法 1-统计学习算法概述">
-                统计学习方法 1-统计学习算法概述 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -682,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-and-Cost-Function-模型和损失函数"><span class="nav-number">1.</span> <span class="nav-text">Model and Cost Function(模型和损失函数)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVM"><span class="nav-number">2.</span> <span class="nav-text">SVM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Paper阅读总结Day1"><span class="nav-number">1.</span> <span class="nav-text">Paper阅读总结Day1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Convolutional-Neural-Networks-For-Facial-Expression-Recognition"><span class="nav-number">1.1.</span> <span class="nav-text">Convolutional Neural Networks For Facial Expression Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章思想"><span class="nav-number">1.1.1.</span> <span class="nav-text">文章思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章使用数据集"><span class="nav-number">1.1.2.</span> <span class="nav-text">文章使用数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验效果与结论"><span class="nav-number">1.1.3.</span> <span class="nav-text">实验效果与结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition"><span class="nav-number">1.2.</span> <span class="nav-text">Island Loss for Learning Discriminative Features in Facial Expression Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章思想-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">文章思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章使用的数据集"><span class="nav-number">1.2.2.</span> <span class="nav-text">文章使用的数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验效果与结论-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">实验效果与结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End-to-End-Deep-Learning-for-Single-Step-Real-Time-Facial-Expression-Recognition"><span class="nav-number">1.3.</span> <span class="nav-text">End to End Deep Learning for Single Step Real-Time Facial Expression Recognition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章思想-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">文章思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章使用数据集-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">文章使用数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验效果与结论-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">实验效果与结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparative-Study-of-Human-Age-Estimation-Based-on-Hand-Crafted-and-Deep-Face-Features"><span class="nav-number">1.4.</span> <span class="nav-text">Comparative Study of Human Age Estimation Based on Hand-Crafted and Deep Face Features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章思想-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">文章思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章使用数据集-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">文章使用数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验效果与结论-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">实验效果与结论</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
