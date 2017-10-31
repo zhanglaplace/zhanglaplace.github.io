@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
 <meta property="og:description" content="Paper阅读总结Day11.Convolutional Neural Networks For Facial Expression Recognition文章思想  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-30T16:12:44.328Z">
+<meta property="og:updated_time" content="2017-10-31T14:57:00.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Paper阅读总结Day1">
 <meta name="twitter:description" content="Paper阅读总结Day11.Convolutional Neural Networks For Facial Expression Recognition文章思想  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。">
@@ -448,7 +448,7 @@
       
         <h1 id="Paper阅读总结Day1"><a href="#Paper阅读总结Day1" class="headerlink" title="Paper阅读总结Day1"></a>Paper阅读总结Day1</h1><h2 id="1-Convolutional-Neural-Networks-For-Facial-Expression-Recognition"><a href="#1-Convolutional-Neural-Networks-For-Facial-Expression-Recognition" class="headerlink" title="1.Convolutional Neural Networks For Facial Expression Recognition"></a>1.Convolutional Neural Networks For Facial Expression Recognition</h2><h3 id="文章思想"><a href="#文章思想" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的一篇关于表情识别的文章，运用简单的CNN结构，在文章中对比了深层次的网络结构和浅层次的网络结构的效果，同时将前向的最后一层特征与自己手动提取的Hog特征做了特征融合，并重新训练一个全连接层，得到的效果与不用特征融合效果一致。</p>
 <h3 id="文章使用数据集"><a href="#文章使用数据集" class="headerlink" title="文章使用数据集"></a>文章使用数据集</h3><p>  Fer2013 Database，通过浅层次和深层次的横向对比与 加入hog与不加hog的横向对比</p>
-<h3 id="实验效果与结论"><a href="#实验效果与结论" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  深层次的CNN准确率大概是65%，加入HOG与不加效果基本一致，结论是否定了Hog特征融合对表情识别有效果的提升。</p>
+<h3 id="实验效果与结论"><a href="#实验效果与结论" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  深层次的CNN准确率大概是65%，加入HOG与不加效果基本一致，结论是否定了Hog特征融合对表情识别有效果的提升。<br><a id="more"></a></p>
 <h2 id="2-Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition"><a href="#2-Island-Loss-for-Learning-Discriminative-Features-in-Facial-Expression-Recognition" class="headerlink" title="2.Island Loss for Learning Discriminative Features in Facial Expression Recognition"></a>2.Island Loss for Learning Discriminative Features in Facial Expression Recognition</h2><h3 id="文章思想-1"><a href="#文章思想-1" class="headerlink" title="文章思想"></a>文章思想</h3><p>  简单的在centerLoss的基础上，添加了衡量各类别类心的loss，由于centerloss只关注了样本到类心的类内距离，而IslandLoss在关注类心距离的同时，添加了类间距离的loss，采用余弦距离衡量类心的相似程度。<br>$$\zeta = \zeta_S+\lambda (\zeta_C+\lambda_1\zeta_{is})$$</p>
 <h3 id="文章使用的数据集"><a href="#文章使用的数据集" class="headerlink" title="文章使用的数据集"></a>文章使用的数据集</h3><p>  Oulu-CASIA database 、 Extended Cokn-kanada和MMI database，fer2013</p>
 <h3 id="实验效果与结论-1"><a href="#实验效果与结论-1" class="headerlink" title="实验效果与结论"></a>实验效果与结论</h3><p>  在各个数据集上的表现都优于SoftmaxLoss以及 CenterLoss+SoftmaxLoss.需要把握各个loss的权重调节</p>
@@ -621,7 +621,7 @@
             
             
             <div class="site-state-item site-state-categories">
-              <a href="/categories/index_back.html">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
