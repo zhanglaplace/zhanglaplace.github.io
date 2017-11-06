@@ -1,3 +1,3 @@
 http://www.enjoyai.site/2017/10/30/Paper阅读总结 Day1/
 http://www.enjoyai.site/2017/10/24/Caffe VisionLayer分析/
-http://www.enjoyai.site/2017/10/22/Caffe CommonLayer分析/
+http://www.enjoyai.site/2017/10/20/Caffe Loss分析/

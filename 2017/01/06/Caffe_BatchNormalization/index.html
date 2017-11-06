@@ -97,20 +97,18 @@
 
 
 
-<meta name="description" content="Caffe_Layers1.基本数据结构1234//Layer层主要的的参数LayerParamter layer_param_; // protobuf内的layer参数vector&amp;lt;shared_ptr&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;gt;blobs_;//存储layer的参数，vector&amp;lt;bool&amp;gt;param_propagate_down_;//表">
+<meta name="description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。   那么再开始前，先进行必要的公式说明：定义$L$为网络的损失函数，BN层的输出为y，根据反向传">
 <meta name="keywords" content="Caffe,DeepLearning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Caffe Layer分析">
-<meta property="og:url" content="http://www.enjoyai.site/2017/10/19/Caffe_layer/index.html">
+<meta property="og:title" content="Caffe Batch Normalization推导">
+<meta property="og:url" content="http://www.enjoyai.site/2017/01/06/Caffe_BatchNormalization/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Caffe_Layers1.基本数据结构1234//Layer层主要的的参数LayerParamter layer_param_; // protobuf内的layer参数vector&amp;lt;shared_ptr&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;gt;blobs_;//存储layer的参数，vector&amp;lt;bool&amp;gt;param_propagate_down_;//表">
+<meta property="og:description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。   那么再开始前，先进行必要的公式说明：定义$L$为网络的损失函数，BN层的输出为y，根据反向传">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images2017.cnblogs.com/blog/888534/201710/888534-20171019224727334-359802148.png">
-<meta property="og:updated_time" content="2017-10-20T17:25:51.547Z">
+<meta property="og:updated_time" content="2017-11-06T14:39:05.478Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caffe Layer分析">
-<meta name="twitter:description" content="Caffe_Layers1.基本数据结构1234//Layer层主要的的参数LayerParamter layer_param_; // protobuf内的layer参数vector&amp;lt;shared_ptr&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;gt;blobs_;//存储layer的参数，vector&amp;lt;bool&amp;gt;param_propagate_down_;//表">
-<meta name="twitter:image" content="http://images2017.cnblogs.com/blog/888534/201710/888534-20171019224727334-359802148.png">
+<meta name="twitter:title" content="Caffe Batch Normalization推导">
+<meta name="twitter:description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。   那么再开始前，先进行必要的公式说明：定义$L$为网络的损失函数，BN层的输出为y，根据反向传">
 
 
 
@@ -140,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://www.enjoyai.site/2017/10/19/Caffe_layer/"/>
+  <link rel="canonical" href="http://www.enjoyai.site/2017/01/06/Caffe_BatchNormalization/"/>
 
 
 
 
 
-  <title>Caffe Layer分析 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Caffe Batch Normalization推导 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -317,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/19/Caffe_layer/">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/01/06/Caffe_BatchNormalization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -334,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Caffe Layer分析</h1>
+          <h1 class="post-title" itemprop="name headline">Caffe Batch Normalization推导</h1>
         
 
         <div class="post-meta">
@@ -346,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T11:31:00+08:00">
-                2017-10-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-06T13:44:33+08:00">
+                2017-01-06
               </time>
             
 
@@ -386,7 +384,7 @@
 
           
           
-             <span id="/2017/10/19/Caffe_layer/" class="leancloud_visitors" data-flag-title="Caffe Layer分析">
+             <span id="/2017/01/06/Caffe_BatchNormalization/" class="leancloud_visitors" data-flag-title="Caffe Batch Normalization推导">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -411,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  755 字
+                  717 字
                 </span>
               
 
@@ -427,7 +425,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -448,23 +446,19 @@
       
 
       
-        <p><img src="http://images2017.cnblogs.com/blog/888534/201710/888534-20171019224727334-359802148.png" alt=""></p>
-<h1 id="Caffe-Layers"><a href="#Caffe-Layers" class="headerlink" title="Caffe_Layers"></a>Caffe_Layers</h1><h3 id="1-基本数据结构"><a href="#1-基本数据结构" class="headerlink" title="1.基本数据结构"></a>1.基本数据结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Layer层主要的的参数</span></div><div class="line">LayerParamter layer_param_; <span class="comment">// protobuf内的layer参数</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">shared_ptr</span>&lt;Blob&lt;Dtype&gt;*&gt;&gt;blobs_;<span class="comment">//存储layer的参数，</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;param_propagate_down_;<span class="comment">//表示是否计算各个blobs反向误差。</span></div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="2-主要函数接口"><a href="#2-主要函数接口" class="headerlink" title="2.主要函数接口"></a>2.主要函数接口</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SetUp</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;bottom,</span></span></div><div class="line"><span class="function"><span class="params">                    <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function">Dtype <span class="title">Forward</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;bottom,</span></span></div><div class="line"><span class="function"><span class="params">                    <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Backward</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp;top,</span></span></div><div class="line"><span class="function"><span class="params"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;param_propagate_down,<span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure>
-<h3 id="3-具体的Layer分析"><a href="#3-具体的Layer分析" class="headerlink" title="3.具体的Layer分析"></a>3.具体的Layer分析</h3><pre><code>具体的常用Layer分析
-</code></pre><h4 id="1-数据层-DataLayer"><a href="#1-数据层-DataLayer" class="headerlink" title="(1) 数据层(DataLayer)"></a>(1) 数据层(DataLayer)</h4><p>数据通过数据层进入Layer,可以来自于数据库(LevelDB或者LMDB),也可以来自内存，HDF5等<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Database：类型 Database</span></div><div class="line"><span class="comment">//必须参数 source,batch_size</span></div><div class="line"><span class="comment">//可选参数：rand_skip,mirror,backend[default LEVELDB]</span></div><div class="line"></div><div class="line"><span class="comment">// In-Memory：类型 MemoryData</span></div><div class="line"><span class="comment">// 必选参数：batch_size，channels,height,width</span></div><div class="line"></div><div class="line"><span class="comment">//HDF5 Input:类型 HDF5Data</span></div><div class="line"><span class="comment">//必选参数: source,batch_size</span></div><div class="line"></div><div class="line"><span class="comment">//Images : 类型 ImageData</span></div><div class="line"><span class="comment">//必要参数：source(文件名label),batch_size</span></div><div class="line"><span class="comment">//可选参数：rand_skip,shuffle,new_width,new_height;</span></div></pre></td></tr></table></figure></p>
-<h4 id="2-激励层-neuron-layers"><a href="#2-激励层-neuron-layers" class="headerlink" title="(2) 激励层(neuron_layers)"></a>(2) 激励层(neuron_layers)</h4><pre><code>一般来说，激励层是element-wise，输入输出大小相同，一般非线性函数
-输入：n\*c\*h\*w
-输出：n\*c\*h\*w
-</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ReLU/PReLU</span></div><div class="line"><span class="comment">//可选参数 negative_slope 指定输入值小于零时的输出。</span></div><div class="line"><span class="comment">// f(x) = x*(x&gt;0)+negative_slope*(x&lt;=0)</span></div><div class="line"><span class="comment">//ReLU目前使用最为广泛，收敛快，解决梯度弥散问题</span></div><div class="line">layer&#123;</div><div class="line">    name:<span class="string">"relu"</span></div><div class="line">    type:<span class="string">"ReLU"</span></div><div class="line">    bottom:<span class="string">"conv1"</span></div><div class="line">    top:<span class="string">"conv1"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Sigmoid</span></div><div class="line"><span class="comment">//f(x) = 1./(1+exp(-x)); 负无穷--正无穷映射到-1---1</span></div><div class="line">layer&#123;</div><div class="line">    name:<span class="string">"sigmoid-test"</span></div><div class="line">    bottom:<span class="string">"conv1"</span></div><div class="line">    top:<span class="string">"conv1"</span></div><div class="line">    type:<span class="string">"Sigmoid"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="3-视觉层-vision-layer"><a href="#3-视觉层-vision-layer" class="headerlink" title="(3) 视觉层(vision_layer)"></a>(3) 视觉层(vision_layer)</h4><pre><code>常用layer操作
-</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//卷积层(Convolution):类型Convolution</span></div><div class="line"> <span class="comment">//包含学习率，输出卷积核，卷积核size，初始方式，权值衰减</span></div><div class="line"> <span class="comment">//假使输入n*ci*hi*wi,则输出</span></div><div class="line"> <span class="comment">// new_h = ((hi-kernel_h)+2*pad_h)/stride+1;</span></div><div class="line"> <span class="comment">// new_w = ((wi-kernel_w)+2*pad_w)/stride+1;</span></div><div class="line"> <span class="comment">//输出n*num_output*new_h*new_w;</span></div><div class="line"> layer&#123;</div><div class="line">     name: <span class="string">"conv1"</span></div><div class="line">     type: <span class="string">"CONVOLUTION"</span></div><div class="line">     bottom: <span class="string">"data"</span></div><div class="line">     top: <span class="string">"conv1"</span></div><div class="line">     blobs_lr: <span class="number">1</span></div><div class="line">     blobs_lr: <span class="number">2</span></div><div class="line">     weight_decay: <span class="number">1</span></div><div class="line">     weight_decay: <span class="number">0</span></div><div class="line">     convolution_param &#123;</div><div class="line">         num_output: <span class="number">96</span></div><div class="line">         kernel_size: <span class="number">11</span></div><div class="line">         stride: <span class="number">4</span></div><div class="line">         weight_filler &#123;</div><div class="line">             type: <span class="string">"gaussian"</span></div><div class="line">            <span class="built_in">std</span>: <span class="number">0.01</span></div><div class="line">         &#125;</div><div class="line">         bias_filler &#123;</div><div class="line">           type: <span class="string">"constant"</span></div><div class="line">           value: <span class="number">0</span></div><div class="line">         &#125;</div><div class="line">      &#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"><span class="comment">//池化层(Pooling) 类型 Pooling</span></div><div class="line"><span class="comment">// (hi-kernel_h)/2+1;</span></div><div class="line">layer&#123;</div><div class="line">    name:<span class="string">"pool1"</span></div><div class="line">    type:<span class="string">"POOLING"</span></div><div class="line">    bottom:<span class="string">"conv1"</span></div><div class="line">    top:<span class="string">"conv1"</span></div><div class="line">    pooling_param&#123;</div><div class="line">        pool:MAX <span class="comment">//AVE,STOCHASTIC</span></div><div class="line">        kernel_size:<span class="number">3</span></div><div class="line">        stride:<span class="number">2</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//BatchNormalization</span></div><div class="line"><span class="comment">// x' = (x-u)/δ ;y = α*x'+β;</span></div></pre></td></tr></table></figure>
-<h4 id="4-损失层-Loss-layer"><a href="#4-损失层-Loss-layer" class="headerlink" title="(4) 损失层(Loss_layer)"></a>(4) 损失层(Loss_layer)</h4><pre><code>最小化输出于目标的LOSS来驱动学习更新
-</code></pre><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Softmax</span></div></pre></td></tr></table></figure>
-<h3 id="4-说明"><a href="#4-说明" class="headerlink" title="4.说明"></a>4.说明</h3><p>SetUp函数需要根据实际的参数设置进行实现，对各种类型的参数初始化；Forward和Backward对应前向计算和反向更新，输入统一都是bottom，输出为top，其中Backward里面有个propagate_down参数，用来表示该Layer是否反向传播参数。<br>在Forward和Backward的具体实现里，会根据Caffe::mode()进行对应的操作，即使用cpu或者gpu进行计算，两个都实现了对应的接口Forward_cpu、Forward_gpu和Backward_cpu、Backward_gpu，这些接口都是virtual，具体还是要根据layer的类型进行对应的计算（注意：有些layer并没有GPU计算的实现，所以封装时加入了CPU的计算作为后备）。另外，还实现了ToProto的接口，将Layer的参数写入到protocol buffer文件中。</p>
+        <h1 id="Caffe-BatchNormalization-推导"><a href="#Caffe-BatchNormalization-推导" class="headerlink" title="Caffe BatchNormalization 推导"></a>Caffe BatchNormalization 推导</h1><p>  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。</p>
+<p>  那么再开始前，先进行必要的公式说明：定义$L$为网络的损失函数，BN层的输出为y，根据反向传播目前已知 $\frac{\partial L}{\partial y_i}$,其中：<br>   $$y_i = \frac{xi-\overline{x}}{\sqrt{\delta^2+\epsilon}},\quad\overline x = \frac{1}{m}\sum_{i=1}^{m}x_i,\quad \delta^2 = \frac{1}{m}\sum_{i=1}{m}(x_i-\overline x)^2,\quad 求\frac{\partial L}{\partial x_i}$$</p>
+<p>  推导的过程中应用了链式法则：<br>  $$ \frac{\partial L}{\partial x_i} = \sum_{j=1}^{m}{\frac{\partial L}{\partial y_j}*\frac{\partial y_j}{\partial x_i}} $$<br>  则只需要着重讨论公式 $\frac{\partial y_j}{\partial x_i}$</p>
+<p>  分布探讨：</p>
+<p>  (1) $\overline x$对$x_i$的导函数<br>  $$\frac{\partial \overline x}{\partial x_i} = \frac{1}{m} $$</p>
+<p>  (2) $\delta^2$对$x_i$的导函数<br>  $$\frac{\partial \delta^2}{\partial x_i} = \frac{1}{m}(\sum_{j=1}^{m}2*(x_j-\overline x)*(-\frac{1}{m}))+2(x_i-\overline x)$$<br>  由于 $\sum_{j=1}^{m}2*(x_j-\overline x) = 2* \sum_{i=1}^{m}x_i - n*\overline x = 0$<br>  所以： $\frac{\partial \delta^2}{\partial x_i} = \frac{2}{m}*(x_i-\overline x)$</p>
+<p>  具体推导：<br>  $$\frac{\partial y_j}{\partial x_i} = \frac{\partial{\frac{x_j -\overline x}{\sqrt{\delta^2+\epsilon}}}}{\partial x_i} $$<br>  此处当j等于i成立时时，分子求导多一个 $x_i$的导数</p>
+<p>  $$\frac{\partial y_j}{\partial x_i} = -\frac{1}{m}*(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j - \overline x)\quad\quad i \neq j $$<br>  $$\frac{\partial y_j}{\partial x_i} = (1-\frac{1}{m})*(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j - \overline x)\quad\quad i = j$$</p>
+<p>  根据上式子，我们代入链式法则的式子<br>  $$\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial y_i}*(\delta^2+\epsilon)^{-1/2} + \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*(-\frac{1}{m}(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j-\overline x))$$</p>
+<p>  我们提出 $(\delta^2+\epsilon)^{-1/2}:$<br>  $$\frac{\partial L}{\partial x_i} = (\delta^2+\epsilon)^{-1/2}*(\frac{\partial L}{\partial y_i}- \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}-\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}(\delta^2+\epsilon)^{-1}(x_i-\overline x)(x_j-\overline x)) \ =(\delta^2+\epsilon)^{-1/2}*(\frac{\partial L}{\partial y_i}- \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}-\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}*y_j<em>\y_i \\<br>  =(\delta^2+\epsilon)^{-1/2}\</em>(\frac{\partial L}{\partial y_i}- \frac{1}{m}\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}-\frac{1}{m}y_i\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*y_j)$$</p>
+<p>  至此，我们可以对应到caffe的具体实现部分<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// if Y = (X-mean(X))/(sqrt(var(X)+eps)), then</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// dE(Y)/dX =</span></div><div class="line"><span class="comment">//   (dE/dY - mean(dE/dY) - mean(dE/dY \cdot Y) \cdot Y)</span></div><div class="line"><span class="comment">//     ./ sqrt(var(X) + eps)</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// where \cdot and ./ are hadamard product and elementwise division,</span></div></pre></td></tr></table></figure></p>
 <blockquote>
-<p>本文作者： 张峰<br>本文链接： <a href="https://zhanglaplace.github.io/2017/10/19/Caffe_layer/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/19/Caffe_layer/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+<p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
 </blockquote>
 
       
@@ -527,18 +521,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/Caffe_blob/" rel="next" title="Caffe Blob分析">
-                <i class="fa fa-chevron-left"></i> Caffe Blob分析
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/19/Caffe_Net/" rel="prev" title="Caffe Net分析">
-                Caffe Net分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/07/logistic/" rel="prev" title="Logistic回归分析">
+                Logistic回归分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -699,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Caffe-Layers"><span class="nav-number">1.</span> <span class="nav-text">Caffe_Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本数据结构"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.基本数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主要函数接口"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.主要函数接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-具体的Layer分析"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.具体的Layer分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据层-DataLayer"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">(1) 数据层(DataLayer)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-激励层-neuron-layers"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">(2) 激励层(neuron_layers)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-视觉层-vision-layer"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">(3) 视觉层(vision_layer)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-损失层-Loss-layer"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">(4) 损失层(Loss_layer)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-说明"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.说明</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Caffe-BatchNormalization-推导"><span class="nav-number">1.</span> <span class="nav-text">Caffe BatchNormalization 推导</span></a></li></ol></div>
             
 
           </div>
