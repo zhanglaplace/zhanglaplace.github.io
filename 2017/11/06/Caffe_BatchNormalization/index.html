@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Caffe,DeepLearning," />
 
 
 
@@ -97,16 +97,18 @@
 
 
 
-<meta name="description" content="明德厚学 求是创新">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhangFeng&#39;s Blog">
-<meta property="og:url" content="http://www.enjoyai.site/archives/2017/01/index.html">
+<meta name="description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。">
+<meta name="keywords" content="Caffe,DeepLearning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caffe Batch Normalization推导">
+<meta property="og:url" content="http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="明德厚学 求是创新">
+<meta property="og:description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-06T14:41:53.290Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZhangFeng&#39;s Blog">
-<meta name="twitter:description" content="明德厚学 求是创新">
+<meta name="twitter:title" content="Caffe Batch Normalization推导">
+<meta name="twitter:description" content="Caffe BatchNormalization 推导  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。">
 
 
 
@@ -136,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://www.enjoyai.site/archives/2017/01/"/>
+  <link rel="canonical" href="http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/"/>
 
 
 
 
 
-  <title>归档 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Caffe Batch Normalization推导 | ZhangFeng's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -161,7 +163,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,74 +301,254 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 13 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/01/06/Caffe_BatchNormalization/" itemprop="url">
-              
-                <span itemprop="name">Caffe Batch Normalization推导</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Caffe Batch Normalization推导</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-06T13:44:33+08:00"
-              content="2017-01-06" >
-          01-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T13:44:33+08:00">
+                2017-11-06
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">Caffe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/06/Caffe_BatchNormalization/" class="leancloud_visitors" data-flag-title="Caffe Batch Normalization推导">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  717 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="Caffe-BatchNormalization-推导"><a href="#Caffe-BatchNormalization-推导" class="headerlink" title="Caffe BatchNormalization 推导"></a>Caffe BatchNormalization 推导</h1><p>  总所周知，BatchNormalization通过对数据分布进行归一化处理，从而使得网络的训练能够快速并简单，在一定程度上还能防止网络的过拟合，通过仔细看过Caffe的源码实现后发现，Caffe是通过BN层和Scale层来完整的实现整个过程的。<br><a id="more"></a><br>  那么再开始前，先进行必要的公式说明：定义$L$为网络的损失函数，BN层的输出为y，根据反向传播目前已知 $\frac{\partial L}{\partial y_i}$,其中：<br>   $$y_i = \frac{xi-\overline{x}}{\sqrt{\delta^2+\epsilon}},\quad\overline x = \frac{1}{m}\sum_{i=1}^{m}x_i,\quad \delta^2 = \frac{1}{m}\sum_{i=1}{m}(x_i-\overline x)^2,\quad 求\frac{\partial L}{\partial x_i}$$</p>
+<p>  推导的过程中应用了链式法则：<br>  $$ \frac{\partial L}{\partial x_i} = \sum_{j=1}^{m}{\frac{\partial L}{\partial y_j}*\frac{\partial y_j}{\partial x_i}} $$<br>  则只需要着重讨论公式 $\frac{\partial y_j}{\partial x_i}$</p>
+<p>  分布探讨：</p>
+<p>  (1) $\overline x$对$x_i$的导函数<br>  $$\frac{\partial \overline x}{\partial x_i} = \frac{1}{m} $$</p>
+<p>  (2) $\delta^2$对$x_i$的导函数<br>  $$\frac{\partial \delta^2}{\partial x_i} = \frac{1}{m}(\sum_{j=1}^{m}2*(x_j-\overline x)*(-\frac{1}{m}))+2(x_i-\overline x)$$<br>  由于 $\sum_{j=1}^{m}2*(x_j-\overline x) = 2* \sum_{i=1}^{m}x_i - n*\overline x = 0$<br>  所以： $\frac{\partial \delta^2}{\partial x_i} = \frac{2}{m}*(x_i-\overline x)$</p>
+<p>  具体推导：<br>  $$\frac{\partial y_j}{\partial x_i} = \frac{\partial{\frac{x_j -\overline x}{\sqrt{\delta^2+\epsilon}}}}{\partial x_i} $$<br>  此处当j等于i成立时时，分子求导多一个 $x_i$的导数</p>
+<p>  $$\frac{\partial y_j}{\partial x_i} = -\frac{1}{m}*(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j - \overline x)\quad\quad i \neq j $$<br>  $$\frac{\partial y_j}{\partial x_i} = (1-\frac{1}{m})*(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j - \overline x)\quad\quad i = j$$</p>
+<p>  根据上式子，我们代入链式法则的式子<br>  $$\frac{\partial L}{\partial x_i} = \frac{\partial L}{\partial y_i}*(\delta^2+\epsilon)^{-1/2} + \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*(-\frac{1}{m}(\delta^2+\epsilon)^{-1/2}-\frac{1}{m}(\delta^2+\epsilon)^{-3/2}(x_i-\overline x)(x_j-\overline x))$$</p>
+<p>  我们提出 $(\delta^2+\epsilon)^{-1/2}:$<br>  $$\frac{\partial L}{\partial x_i} = (\delta^2+\epsilon)^{-1/2}*(\frac{\partial L}{\partial y_i}- \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}-\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}(\delta^2+\epsilon)^{-1}(x_i-\overline x)(x_j-\overline x)) \ =(\delta^2+\epsilon)^{-1/2}*(\frac{\partial L}{\partial y_i}- \sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}-\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*\frac{1}{m}*y_j<em>\y_i \\<br>  =(\delta^2+\epsilon)^{-1/2}\</em>(\frac{\partial L}{\partial y_i}- \frac{1}{m}\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}-\frac{1}{m}y_i\sum_{j=1}^{m}\frac{\partial L}{\partial y_j}*y_j)$$</p>
+<p>  至此，我们可以对应到caffe的具体实现部分<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// if Y = (X-mean(X))/(sqrt(var(X)+eps)), then</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// dE(Y)/dX =</span></div><div class="line"><span class="comment">//   (dE/dY - mean(dE/dY) - mean(dE/dY \cdot Y) \cdot Y)</span></div><div class="line"><span class="comment">//     ./ sqrt(var(X) + eps)</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// where \cdot and ./ are hadamard product and elementwise division,</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay1.jpg" alt="ZhangLaplace 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay1.jpg" alt="ZhangLaplace 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Caffe/" rel="tag"># Caffe</a>
+          
+            <a href="/tags/DeepLearning/" rel="tag"># DeepLearning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/30/Paper阅读总结 Day1/" rel="next" title="Paper阅读总结Day1">
+                <i class="fa fa-chevron-left"></i> Paper阅读总结Day1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -374,6 +556,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
 
         </div>
         
@@ -394,8 +582,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -481,6 +678,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Caffe-BatchNormalization-推导"><span class="nav-number">1.</span> <span class="nav-text">Caffe BatchNormalization 推导</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -608,6 +821,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
 
   
 
@@ -633,6 +850,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146997"></script>
+      <!-- UY END -->
     
   
 
