@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用$Layer$(1) $CropLayer$  CropLayer完成数据的裁剪，输入两个 $bottom,botto">
+<meta name="description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。">
 <meta name="keywords" content="Caffe,DeepLearning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Caffe CommonLayer分析">
 <meta property="og:url" content="http://www.enjoyai.site/2017/10/20/Caffe CommonLayer分析/index.html">
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
-<meta property="og:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用$Layer$(1) $CropLayer$  CropLayer完成数据的裁剪，输入两个 $bottom,botto">
+<meta property="og:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-06T14:35:26.193Z">
+<meta property="og:updated_time" content="2017-11-07T13:57:36.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe CommonLayer分析">
-<meta name="twitter:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。 1.常用$Layer$(1) $CropLayer$  CropLayer完成数据的裁剪，输入两个 $bottom,botto">
+<meta name="twitter:description" content="Caffe CommonLayer分析  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。">
 
 
 
@@ -446,7 +446,7 @@
       
 
       
-        <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。</p>
+        <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。<br><a id="more"></a></p>
 <h4 id="1-常用-Layer"><a href="#1-常用-Layer" class="headerlink" title="1.常用$Layer$"></a>1.常用$Layer$</h4><h5 id="1-CropLayer"><a href="#1-CropLayer" class="headerlink" title="(1) $CropLayer$"></a>(1) $CropLayer$</h5><p>  CropLayer完成数据的裁剪，输入两个 $bottom,bottom[0]$ 为原始数据，$bottom[1]$ 为裁剪后<br>的输出尺寸，输出 $top[0]$ 为裁剪后的数据，尺寸与 $bottom[1]$ 相同，其中有$axis 控制裁剪<br>的起始轴,offset表示对应裁剪轴的起始位置。举例说明：<br>$$bottom[0]的shape:[32,64,512,512],bottom[1]的shape:[32,32,256,256] \\<br>axis = 1 \qquad offset = [:,16,128,128] \\<br>则:top[1]的为bottom[0][:,16+bottom[1].shape(1),128+bottom[1].shape(2),128+bottom[1].shape(3)))$$<br>下面会进行具体的代码解释说明</p>
 <p>1.基本成员变量<br> 基本成员变量，记录开始的axis和每个shape的起始偏移<br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;offsets_;</div><div class="line"><span class="keyword">int</span> axis;</div></pre></td></tr></table></figure></p>
 <p>2.基本成员函数<br>  基本成员函数包括LayerSetup,Reshape,forward,Backward,crop_copy，具体实现如下<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//LayerSetup 主要完成proto的参数提取过程</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> CropLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">  <span class="keyword">const</span> CropParameter&amp; crop_param = <span class="keyword">this</span>-&gt;layer_param_.crop_param();</div><div class="line">  CHECK_EQ(bottom.size(),<span class="number">2</span>);<span class="comment">//必须是2个</span></div><div class="line">  <span class="keyword">int</span> input_dim = bottom[<span class="number">0</span>]-&gt;num_axes();<span class="comment">// 一般为4， 即shape_.size()</span></div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> start_axis = bottom[<span class="number">0</span>]-&gt;CanonicalAxisIndex(crop_param.axis());</div><div class="line">  <span class="comment">// 这里的axis要判断是否小于Input_dim</span></div><div class="line">  <span class="keyword">if</span> (crop_param.offset_size() &gt; <span class="number">1</span>) &#123; <span class="comment">// offset_size() == offset.size()</span></div><div class="line">      CHECK_EQ(start_axis+crop_param.offset_size(),input_dim);</div><div class="line">      <span class="comment">//保证起始后的axis均有offset</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Reshape,确定offsets和crop_size的尺寸</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> CropLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)&#123;</div><div class="line">    <span class="keyword">const</span> CropParameter param = <span class="keyword">this</span>-&gt;layer_param_.crop_param();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> dim = bottom[<span class="number">0</span>]-&gt;num_axes();</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> start_axis = param.axis();</div><div class="line">    offsets_ = <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;&lt;<span class="keyword">int</span>&gt;(input_dim,<span class="number">0</span>);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; new_shape(bottom[<span class="number">0</span>]-&gt;shape());</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; dim; i++) &#123;</div><div class="line">        <span class="keyword">int</span> crop_offset = <span class="number">0</span>; <span class="comment">//偏移量</span></div><div class="line">        <span class="keyword">int</span> new_size = bottom[<span class="number">0</span>]-&gt;shape(i);<span class="comment">//每个shape的size</span></div><div class="line">        <span class="comment">// i &gt;= start_axis的时候才crop,否则不改变shape</span></div><div class="line">        <span class="keyword">if</span> ( i &gt;= start_axis) &#123;</div><div class="line">           new_size = bottom[<span class="number">1</span>].shape(i);</div><div class="line">           <span class="keyword">if</span> (param.offset_size() == <span class="number">1</span>) &#123;<span class="comment">//如果只给出一个offset默认都一样</span></div><div class="line">              crop_offset = param.offset(<span class="number">0</span>);</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">else</span> <span class="keyword">if</span>(param.offset_size() &gt; <span class="number">1</span>)&#123;</div><div class="line">             crop_offset = param.offset(i-start_axis);</div><div class="line">           &#125;</div><div class="line">           CHECK_GE(bottom[<span class="number">0</span>]-&gt;shape(i),crop_offset+bottom[<span class="number">1</span>]-&gt;shape(i));</div><div class="line">        &#125;</div><div class="line">        new_shape[i] = new_size;</div><div class="line">        offsets_[i] = crop_offset;</div><div class="line">    &#125;</div><div class="line">    top[<span class="number">0</span>]-&gt;Reshape(new_shape);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
@@ -527,8 +527,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/19/Caffe_Net/" rel="next" title="Caffe Net分析">
-                <i class="fa fa-chevron-left"></i> Caffe Net分析
+              <a href="/2017/10/20/Caffe 激励函数(Activation)分析/" rel="next" title="Caffe NeuronLayer分析">
+                <i class="fa fa-chevron-left"></i> Caffe NeuronLayer分析
               </a>
             
           </div>
@@ -537,8 +537,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/20/Caffe 激励函数(Activation)分析/" rel="prev" title="Caffe NeuronLayer分析">
-                Caffe NeuronLayer分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/20/Caffe Loss分析/" rel="prev" title="Caffe Loss分析">
+                Caffe Loss分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
