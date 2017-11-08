@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/</loc>
+    <lastmod>2017-11-08T13:29:34.551Z</lastmod>
+    <data>
+        <display>
+        <title>Caffe Batch Normalization推导</title>
+        <pubTime>2017-11-06T05:44:33.000Z</pubTime>
+        
+        <tag>Caffe</tag>
+         
+        <tag>DeepLearning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Caffe" url="http://www.enjoyai.site/categories/Caffe/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.enjoyai.site/2017/11/07/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%B8%B8%E7%94%A8%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87/</loc>
     <lastmod>2017-11-07T14:08:26.283Z</lastmod>
     <data>
@@ -32,28 +54,6 @@
         <display>
         <title>Caffe CommonLayer分析</title>
         <pubTime>2017-10-20T03:16:01.000Z</pubTime>
-        
-        <tag>Caffe</tag>
-         
-        <tag>DeepLearning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Caffe" url="http://www.enjoyai.site/categories/Caffe/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/</loc>
-    <lastmod>2017-11-06T15:00:51.197Z</lastmod>
-    <data>
-        <display>
-        <title>Caffe Batch Normalization推导</title>
-        <pubTime>2017-11-06T05:44:33.000Z</pubTime>
         
         <tag>Caffe</tag>
          
