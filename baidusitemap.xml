@@ -4,30 +4,8 @@
 
     
   <url>
-    <loc>http://www.enjoyai.site/2017/11/09/Caffe_Scale%E5%B1%82%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2017-11-09T12:35:02.136Z</lastmod>
-    <data>
-        <display>
-        <title>Caffe Scale层解析</title>
-        <pubTime>2017-11-09T01:26:33.000Z</pubTime>
-        
-        <tag>Caffe</tag>
-         
-        <tag>DeepLearning</tag>
-         
-         
-           
-             
-              <breadCrumb title="Caffe" url="http://www.enjoyai.site/categories/Caffe/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.enjoyai.site/2017/10/30/Paper%E9%98%85%E8%AF%BB%E6%80%BB%E7%BB%93%20Day1/</loc>
-    <lastmod>2017-11-08T14:46:22.510Z</lastmod>
+    <lastmod>2017-11-09T12:57:06.290Z</lastmod>
     <data>
         <display>
         <title>Paper阅读总结Day1</title>
@@ -43,6 +21,28 @@
            
              
               <breadCrumb title="Facial Expression" url="http://www.enjoyai.site/categories/Facial-Expression/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.enjoyai.site/2017/11/09/Caffe_Scale%E5%B1%82%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2017-11-09T12:35:02.136Z</lastmod>
+    <data>
+        <display>
+        <title>Caffe Scale层解析</title>
+        <pubTime>2017-11-09T01:26:33.000Z</pubTime>
+        
+        <tag>Caffe</tag>
+         
+        <tag>DeepLearning</tag>
+         
+         
+           
+             
+              <breadCrumb title="Caffe" url="http://www.enjoyai.site/categories/Caffe/"/>
           
         </display>
     </data>
