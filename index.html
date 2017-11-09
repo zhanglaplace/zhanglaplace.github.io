@@ -314,6 +314,725 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/09/xcenter_loss_layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/xcenter_loss_layer/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T20:30:48+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/09/xcenter_loss_layer/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  767 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CAFFE_XCENTER_LOSS_LAYER_HPP_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> CAFFE_XCENTER_LOSS_LAYER_HPP_</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/blob.hpp"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/layer.hpp"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/proto/caffe.pb.h"</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/layers/loss_layer.hpp"</span></span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> caffe &#123;</div><div class="line"></div><div class="line">	<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">XCenterLossLayer</span> :</span> <span class="keyword">public</span> LossLayer&lt;Dtype&gt; &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">		<span class="function"><span class="keyword">explicit</span> <span class="title">XCenterLossLayer</span><span class="params">(<span class="keyword">const</span> LayerParameter&amp; param)</span></span></div><div class="line">			: LossLayer&lt;Dtype&gt;(param) &#123;&#125;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">LayerSetUp</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Reshape</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="string">"XCenterLoss"</span>; &#125;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ExactNumBottomBlobs</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="number">2</span>; &#125;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ExactNumTopBlobs</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="number">-1</span>; &#125;</div><div class="line"></div><div class="line">	<span class="keyword">protected</span>:</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line">		<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">			<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"></div><div class="line">		<span class="keyword">int</span> M_;</div><div class="line">		<span class="keyword">int</span> K_;</div><div class="line">		<span class="keyword">int</span> N_;</div><div class="line">		<span class="keyword">int</span> lambda_;</div><div class="line">		Blob&lt;Dtype&gt; distance_;</div><div class="line">		Blob&lt;Dtype&gt; variation_sum_;</div><div class="line">		Blob&lt;Dtype&gt; similarity_sum_;</div><div class="line">    <span class="built_in">vector</span>&lt;Dtype&gt; center_module_;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">&#125;  <span class="comment">// namespace caffe</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// CAFFE_XCENTER_LOSS_LAYER_HPP_</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/filler.hpp"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/layers/xcenter_loss_layer.hpp"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"caffe/util/math_functions.hpp"</span></span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> caffe &#123;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> XCenterLossLayer&lt;Dtype&gt;::LayerSetUp(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line"><span class="keyword">const</span> XCenterLossParameter&amp; param = <span class="keyword">this</span>-&gt;layer_param_.x_center_loss_param();</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> num_output = param.num_output();</div><div class="line">lambda_ = param.lambda();</div><div class="line">N_ = num_output;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> axis = bottom[<span class="number">0</span>]-&gt;CanonicalAxisIndex(</div><div class="line">  param.axis());</div><div class="line">K_ = bottom[<span class="number">0</span>]-&gt;count(axis);</div><div class="line"><span class="comment">// Check if we need to set up the weights</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">this</span>-&gt;blobs_.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">  LOG(INFO) &lt;&lt; <span class="string">"Skipping parameter initialization"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">  <span class="keyword">this</span>-&gt;blobs_.resize(<span class="number">1</span>);</div><div class="line">  <span class="comment">// Intialize the weight</span></div><div class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; center_shape(<span class="number">2</span>);</div><div class="line">  center_shape[<span class="number">0</span>] = N_;</div><div class="line">  center_shape[<span class="number">1</span>] = K_;</div><div class="line">  <span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].reset(<span class="keyword">new</span> Blob&lt;Dtype&gt;(center_shape));</div><div class="line">  <span class="comment">// fill the weights</span></div><div class="line">  <span class="built_in">shared_ptr</span>&lt;Filler&lt;Dtype&gt; &gt; center_filler(GetFiller&lt;Dtype&gt;(</div><div class="line">    param.center_filler()));</div><div class="line">  center_filler-&gt;Fill(<span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].get());</div><div class="line"></div><div class="line">&#125;  <span class="comment">// parameter initialization</span></div><div class="line"><span class="keyword">this</span>-&gt;param_propagate_down_.resize(<span class="keyword">this</span>-&gt;blobs_.size(), <span class="literal">true</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> XCenterLossLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line">CHECK_EQ(bottom[<span class="number">1</span>]-&gt;channels(), <span class="number">1</span>);</div><div class="line">CHECK_EQ(bottom[<span class="number">1</span>]-&gt;height(), <span class="number">1</span>);</div><div class="line">CHECK_EQ(bottom[<span class="number">1</span>]-&gt;width(), <span class="number">1</span>);</div><div class="line">M_ = bottom[<span class="number">0</span>]-&gt;num();</div><div class="line"><span class="comment">// The top shape will be the bottom shape with the flattened axes dropped,</span></div><div class="line"><span class="comment">// and replaced by a single axis with dimension num_output (N_).</span></div><div class="line">LossLayer&lt;Dtype&gt;::Reshape(bottom, top);</div><div class="line">distance_.ReshapeLike(*bottom[<span class="number">0</span>]);</div><div class="line">variation_sum_.ReshapeLike(*<span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>]);</div><div class="line"><span class="keyword">long</span> <span class="keyword">int</span> similarity_count = N_*(N_<span class="number">-1</span>) / <span class="number">2</span>;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;similarity_shape(<span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>]-&gt;shape());</div><div class="line">similarity_shape[<span class="number">0</span>] = similarity_count;</div><div class="line">similarity_sum_.Reshape(similarity_shape);</div><div class="line">center_module_.resize(N_);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> XCenterLossLayer&lt;Dtype&gt;::Forward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line"><span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line"><span class="keyword">const</span> Dtype* label = bottom[<span class="number">1</span>]-&gt;cpu_data();</div><div class="line"><span class="keyword">const</span> Dtype* center = <span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">Dtype* distance_data = distance_.mutable_cpu_data();</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// center_loss</span></div><div class="line"><span class="comment">// the i-th distance_data</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; M_; i++) &#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> label_value = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(label[i]);</div><div class="line">  <span class="comment">// D(i,:) = X(i,:) - C(y(i),:)</span></div><div class="line">  caffe_sub(K_, bottom_data + i * K_, center + label_value * K_, distance_data + i * K_);</div><div class="line">&#125;</div><div class="line">Dtype dot = caffe_cpu_dot(M_ * K_, distance_.cpu_data(), distance_.cpu_data());</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// x_center_loss</span></div><div class="line"></div><div class="line">Dtype* similarity_data = similarity_sum_.mutable_cpu_data();</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt;similarity_py(N_*(N_<span class="number">-1</span>)/<span class="number">2</span>,<span class="number">0.0</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N_;++i)&#123; <span class="comment">//类别遍历</span></div><div class="line">  <span class="comment">//求得各个类别的center模长</span></div><div class="line">  center_module_[i]  = <span class="built_in">sqrt</span>(caffe_cpu_dot(K_,center_+i*K,center_+i*K_));</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; N_<span class="number">-1</span>; i++) &#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> j = i+<span class="number">1</span>; j &lt; N_; j++) &#123;</div><div class="line">     similarity_py</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">Dtype dot1 = Dtype(<span class="number">0</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; similarity_py.size();++n)&#123;</div><div class="line">  <span class="keyword">float</span> sum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; K_; ++k)&#123;</div><div class="line">    sum += similarity_data[n*K_ + k];</div><div class="line">  &#125;</div><div class="line">  dot1 += sum / similarity_py[n]+ <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line">dot1 = Dtype(<span class="number">2</span>)*lambda_* dot1 /similarity_py.size() ;</div><div class="line">Dtype loss = loss / M_ / Dtype(<span class="number">2</span>);</div><div class="line">top[<span class="number">0</span>]-&gt;mutable_cpu_data()[<span class="number">0</span>] = loss + dot1;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> XCenterLossLayer&lt;Dtype&gt;::Backward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down,</div><div class="line"><span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) &#123;</div><div class="line"><span class="comment">// Gradient with respect to centers</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">this</span>-&gt;param_propagate_down_[<span class="number">0</span>]) &#123;</div><div class="line">  <span class="keyword">const</span> Dtype* label = bottom[<span class="number">1</span>]-&gt;cpu_data();</div><div class="line">  Dtype* center_diff = <span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>]-&gt;mutable_cpu_diff();</div><div class="line">  Dtype* variation_sum_data = variation_sum_.mutable_cpu_data();</div><div class="line">  <span class="keyword">const</span> Dtype* distance_data = distance_.cpu_data();</div><div class="line"></div><div class="line">  <span class="comment">// \sum_&#123;y_i==j&#125;</span></div><div class="line">  caffe_set(N_ * K_, (Dtype)<span class="number">0.</span>, variation_sum_.mutable_cpu_data());</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; N_; n++) &#123;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> m = <span class="number">0</span>; m &lt; M_; m++) &#123;</div><div class="line">      <span class="keyword">const</span> <span class="keyword">int</span> label_value = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt;(label[m]);</div><div class="line">      <span class="keyword">if</span> (label_value == n) &#123;</div><div class="line">        count++;</div><div class="line">        caffe_sub(K_, variation_sum_data + n * K_, distance_data + m * K_, variation_sum_data + n * K_);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    caffe_axpy(K_, (Dtype)<span class="number">1.</span> / (count + (Dtype)<span class="number">1.</span>), variation_sum_data + n * K_, center_diff + n * K_);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// Gradient with respect to bottom data</span></div><div class="line"><span class="keyword">if</span> (propagate_down[<span class="number">0</span>]) &#123;</div><div class="line">  caffe_copy(M_ * K_, distance_.cpu_data(), bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff());</div><div class="line">  caffe_scal(M_ * K_, top[<span class="number">0</span>]-&gt;cpu_diff()[<span class="number">0</span>] / M_, bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff());</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (propagate_down[<span class="number">1</span>]) &#123;</div><div class="line">  LOG(FATAL) &lt;&lt; <span class="keyword">this</span>-&gt;type()</div><div class="line">    &lt;&lt; <span class="string">" Layer cannot backpropagate to label inputs."</span>;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CPU_ONLY</span></div><div class="line">STUB_GPU(XCenterLossLayer);</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">INSTANTIATE_CLASS(XCenterLossLayer);</div><div class="line">REGISTER_LAYER_CLASS(XCenterLoss);</div><div class="line"></div><div class="line">&#125;  <span class="comment">// namespace caffe</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/09/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T20:30:48+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/09/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  78 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/09/Caffe_Scale层解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/09/Caffe_Scale层解析/" itemprop="url">Caffe Scale层解析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T09:26:33+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">Caffe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/09/Caffe_Scale层解析/" class="leancloud_visitors" data-flag-title="Caffe Scale层解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,687 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Caffe-Scale层解析"><a href="#Caffe-Scale层解析" class="headerlink" title="Caffe Scale层解析"></a>Caffe Scale层解析</h1><p>  前段时间做了caffe的batchnormalization层的解析，由于整体的BN层实现在Caffe是分段实现的，因此今天抽时间总结下Scale层次，也会后续两个层做合并做下铺垫。</p>
+<h2 id="基本公式梳理"><a href="#基本公式梳理" class="headerlink" title="基本公式梳理"></a>基本公式梳理</h2><p>  Scale层主要完成 $top = alpha*bottom+ beta$的过程，则层中主要有两个参数$alpha$与$beta$,<br>  求导会比较简单。<br>  $$ \frac{\partial y}{\partial x} = alpha ;\quad \frac{\partial y}{\partial alpha} = x;\quad \frac{\partial y}{\partial beta} = 1$$<br>  需要注意的是$alpha$与$beta$均为向量，针对输入的$channels$进行的处理，因此不能简单的认定为一个$float$的实数。</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>  该部分将结合源码实现解析$scale$层:<br>  在Caffe proto中ScaleParameter中对Scale有如下几个参数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">axis [<span class="keyword">default</span> = <span class="number">1</span>] ; 默认的处理维度</div><div class="line">num_axes [<span class="keyword">default</span> = <span class="number">1</span>] ; <span class="comment">//在BN中可以忽略，主要决定第二个bottom</span></div><div class="line">FillerParameter filler ; <span class="comment">//两个FillerParameter即决定初始alpha和beta的填充方式。</span></div><div class="line"><span class="comment">//决定是否学习bias，如果不学习，则可以简化为alpha*x = y</span></div><div class="line">optional <span class="keyword">bool</span> bias_term = <span class="number">4</span> [<span class="keyword">default</span> = <span class="literal">false</span>];</div><div class="line">FillerParameter bias_filler;</div></pre></td></tr></table></figure></p>
+<h3 id="基本成员变量"><a href="#基本成员变量" class="headerlink" title="基本成员变量"></a>基本成员变量</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// caffe的scale层实现+beta调用了bias层。。。。。。。。。。</span></div><div class="line"><span class="built_in">shared_ptr</span>&lt;Layer&lt;Dtype&gt;&gt; bias_layer_; /</div><div class="line"><span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;bias_bottom_vec_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; bias_propagate_down_;</div><div class="line"><span class="keyword">int</span> bias_param_id_;</div><div class="line"></div><div class="line">Blob&lt;Dtype&gt; sum_multiplier_;</div><div class="line">Blob&lt;Dtype&gt;sum_result_;</div><div class="line">Blob&lt;Dtype&gt; temp_;</div><div class="line"><span class="keyword">int</span> axis_;</div><div class="line"><span class="keyword">int</span> outer_dim_,inner_dim_,scale_dim_;</div></pre></td></tr></table></figure>
+<p> 基本成员变量主要包含了Bias层的参数以及Scale层完成对应通道的标注工作。</p>
+<h3 id="基本成员函数"><a href="#基本成员函数" class="headerlink" title="基本成员函数"></a>基本成员函数</h3><p> 主要包含了LayerSetup,Reshape ,Forward和Backward ，内部调用的时候bias_term为true的时候会调用biasLayer的相关函数.</p>
+<h4 id="LayerSetup-层次的建立"><a href="#LayerSetup-层次的建立" class="headerlink" title="LayerSetup,层次的建立"></a>LayerSetup,层次的建立</h4> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> ScaleLayer&lt;Dtype&gt;::LayerSetUp(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line">    <span class="keyword">const</span> ScaleParameter param = <span class="keyword">this</span>-&gt;layer_param_-&gt;scale_param();</div><div class="line">    <span class="keyword">if</span> (bottom.size() == <span class="number">1</span> &amp;&amp; <span class="keyword">this</span>-&gt;blobs_.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="comment">//区分测试与训练，测试时 blobs-已经有值</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(bottom.size() == <span class="number">1</span>)&#123;</div><div class="line">       <span class="comment">// 考虑BN的scale 不需要考虑axes</span></div><div class="line">       axis_ = bottom[<span class="number">0</span>]-&gt;CanonicalAxisIndex(param.axis());<span class="comment">// 1 通道</span></div><div class="line">       <span class="keyword">const</span> <span class="keyword">int</span> num_axes = param.num_axes(); <span class="comment">// 1</span></div><div class="line">       <span class="keyword">this</span>-&gt;blobs_.resize(<span class="number">1</span>);<span class="comment">// alpha;</span></div><div class="line"></div><div class="line">       <span class="comment">//这么大一串，实际就是blobs_[0].reset(new Blob&lt;Dtype&gt;(vector&lt;int&gt;(C)));</span></div><div class="line">       <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator&amp; shape_start =</div><div class="line">       bottom[<span class="number">0</span>]-&gt;shape().begin() + axis_;</div><div class="line">       <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator&amp; shape_end =</div><div class="line">       (num_axes == <span class="number">-1</span>) ? bottom[<span class="number">0</span>]-&gt;shape().end() : (shape_start + num_axes);</div><div class="line">       <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;scale_shape(shape_start, shape_end);</div><div class="line">       <span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].reset(<span class="keyword">new</span> Blob&lt;Dtype&gt;(scale_shape));</div><div class="line"></div><div class="line">       FillerParameter filler_param(param.filler());</div><div class="line">       <span class="keyword">if</span> (!param.has_filler()) &#123; <span class="comment">//没写明填充模式</span></div><div class="line">         filler_param.set_type(<span class="string">"constant"</span>);</div><div class="line">         filler_param.set_value(<span class="number">1</span>);</div><div class="line">       &#125;</div><div class="line">       <span class="built_in">shared_ptr</span>&lt;Filler&lt;Dtype&gt;&gt;filler(GetFiller&lt;Dtype&gt;(filler_param));</div><div class="line">       filler-&gt;Fill(<span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].get());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 处理需不需要bias</span></div><div class="line">    <span class="keyword">if</span> (param.bias_term()) &#123;</div><div class="line">      <span class="function">LayerParameter <span class="title">layer_param</span><span class="params">(<span class="keyword">this</span>-&gt;layer_param_)</span></span>;</div><div class="line">      layer_param.set_type(<span class="string">"Bias"</span>);</div><div class="line">      BiasParameter* bias_param = layer_param_.mutable_bias_param();</div><div class="line">      bias_param-&gt;set_axis(param.aixs());</div><div class="line">      <span class="keyword">if</span> (bottom.size() &gt; <span class="number">1</span>) &#123;</div><div class="line">         bias_param-&gt;set_num_axes(bottom[<span class="number">1</span>]-&gt;num_axes());</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span>&#123;</div><div class="line">        bias_param-&gt;set_num_axes(param.num_axes());<span class="comment">//bn层走下面</span></div><div class="line">      &#125;</div><div class="line">      bias_param-&gt;mutable_filler()-&gt;CopyFrom(param.bias_filler());</div><div class="line">      bias_layer_ = LayerRegistry&lt;Dtype&gt;::CreateLayer(layer_param);</div><div class="line">      bias_bottom_vec_.resize(<span class="number">1</span>);</div><div class="line">      bias_bottom_vec_[<span class="number">0</span>] = bottom[<span class="number">0</span>];</div><div class="line">      bias_layer_-&gt;Setup(bias_bottom_vec_,top);</div><div class="line">      bias_param_id = <span class="keyword">this</span>-&gt;blobs_.size(); <span class="comment">//1 alpha 此处增加个beta</span></div><div class="line">      <span class="keyword">this</span>-&gt;blobs_.resize(bias_param_id_+<span class="number">1</span>); <span class="comment">// 2</span></div><div class="line">      <span class="keyword">this</span>-&gt;blobs_[bias_param_id] = bias_layer_-&gt;blobs()[<span class="number">0</span>];</div><div class="line">      bias_propagate_down_.resize(<span class="number">1</span>,<span class="literal">false</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">this</span>-&gt;param_propagate_down_.resize(<span class="keyword">this</span>-&gt;blobs_.size(),<span class="literal">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> Scale层的一部分在完整BN中是不需要考虑的，完整BN中bottomSize为1，num_axes默认为1，blobs_[0]为长度为C的向量，bias需要调用caffe的bias层，所以会看着比较麻烦。</p>
+<h4 id="Reshape-调整输入输出与中间变量"><a href="#Reshape-调整输入输出与中间变量" class="headerlink" title="Reshape 调整输入输出与中间变量"></a>Reshape 调整输入输出与中间变量</h4><p>  Reshape层完成许多中间变量的size初始化<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Reshape操作</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> ScaleLayer&lt;Dtype&gt;::Reshape(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</div><div class="line">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line">    <span class="keyword">const</span> ScaleParameter param = <span class="keyword">this</span>-&gt;layer_param_-&gt;scale_param();</div><div class="line">    Blob&lt;Dtype&gt;* scale = (bottom.size() &gt; <span class="number">1</span>)?bottom[<span class="number">1</span>]:<span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].get();</div><div class="line">    axis_=(scale-&gt;num_axes()==<span class="number">0</span>)?<span class="number">0</span>:botom[<span class="number">0</span>]-&gt;CanonicalAxisIndex(param.axis());</div><div class="line">    <span class="comment">//这里做了下比较 bottom的NCHW axis_ = 1 则 C == C</span></div><div class="line">    CHECK_EQ(bottom[<span class="number">0</span>]-&gt;shape(axis_) = scale-&gt;shape(<span class="number">0</span>));</div><div class="line"></div><div class="line">    outer_dim_ = bottom[<span class="number">0</span>]-&gt;count(<span class="number">0</span>,axis_);<span class="comment">// n</span></div><div class="line">    scale_dim = scale-&gt;count(); <span class="comment">//c</span></div><div class="line">    inner_dim_ = bottom[<span class="number">0</span>]-&gt;count(axis+<span class="number">1</span>);<span class="comment">// hw</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (bottom[<span class="number">0</span>] == top[<span class="number">0</span>]) &#123;</div><div class="line">      <span class="comment">// Layer得top和bottom同名 in-place computation</span></div><div class="line">      <span class="keyword">const</span> <span class="keyword">bool</span> scale_param = (bottom.size() == <span class="number">1</span>); <span class="comment">//true</span></div><div class="line">      <span class="keyword">if</span> (!scale_param || (scale_param &amp;&amp; <span class="keyword">this</span>-&gt;param_propagate_down_[<span class="number">0</span>]) &#123;</div><div class="line">        <span class="comment">// 后面一个条件成立，需要backward</span></div><div class="line">        <span class="comment">//防止修改top时，bottom改变，做临时,因为求导要用到原始的bottom-data</span></div><div class="line">        temp_.ReshapeLike(*bottom[<span class="number">0</span>]);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      top[<span class="number">0</span>]-&gt;ReshapeLike(*bottom[<span class="number">0</span>]);<span class="comment">//</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//类似于bn的num-by—tran 保存中间的NC结果 NC*1*1*1</span></div><div class="line">    sum_result_.Reshape(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">1</span>,outer_dim_*scale_dim_));</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> sum_mult_size = <span class="built_in">std</span>::max(outer_dim_,inner_dim_);</div><div class="line">    <span class="comment">// 为什么不类似于BN做两个temp vector呢</span></div><div class="line">    sum_multiplier_.Reshape(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(<span class="number">1</span>,sum_mult_size));</div><div class="line">    <span class="keyword">if</span> (sum_multiplier_.cpu_data()[sum_mult_size<span class="number">-1</span>] != Dtype(<span class="number">1</span>)) &#123;</div><div class="line">      caffe_set(sum_mult_size,Dtype(<span class="number">1</span>),sum_multiplier_.mutable_cpu_data());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (bias_layer_) &#123;</div><div class="line">      bias_bottom_vec_[<span class="number">0</span>] = top[<span class="number">0</span>];</div><div class="line">      bias_layer_-&gt;Reshape(bias_bottom_vec_,top);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  Reshape操作同BN的基本相似，只不过此处只是新建了两个中间变量，sum_multiplier_和sum_result_.</p>
+<h4 id="Forward-前向计算"><a href="#Forward-前向计算" class="headerlink" title="Forward 前向计算"></a>Forward 前向计算</h4><p>  前向计算，在BN中国紧跟着BN的归一化输出，完成乘以alpha与+bias的操作，由于alpha与bias均为C的向量，因此需要先进行广播。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> ScaleLayer&lt;Dtype&gt;::Forward_cpu(</div><div class="line">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) &#123;</div><div class="line">  <span class="keyword">const</span> Dtype* bottom_data = bottom[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">  <span class="keyword">if</span> (bottom[<span class="number">0</span>] == top[<span class="number">0</span>]) &#123;</div><div class="line">     <span class="comment">// 先进行一次临时拷贝复制</span></div><div class="line">     caffe_copy(bottom[<span class="number">0</span>]-&gt;count(),bottom_data,temp_.mutable_cpu_data());</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">const</span> Dtype* scale_data = (bottom.size() &gt; <span class="number">1</span>)?bottom[<span class="number">1</span>]:</div><div class="line">                      <span class="keyword">this</span>-&gt;blios_[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">  Dtype* top_data = top[<span class="number">0</span>]-&gt;mutable_cpu_data();</div><div class="line">  <span class="comment">// 这里的遍历实际上和广播的类似，一种是每次操作inner_dim个元素，一种是讲alpha</span></div><div class="line">  <span class="comment">// 广播到整个feature_map，然后再调用一次cpu_scale</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> n = <span class="number">0</span>; n &lt; outer_dim_; n++) &#123; <span class="comment">// n</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> d = <span class="number">0</span>; d &lt; scale_dim_; d++) &#123; <span class="comment">//c</span></div><div class="line">       <span class="keyword">const</span> Dtype factory = scale_data[d];<span class="comment">// 取某一个通道的值</span></div><div class="line">       caffe_cpu_scale(inner_dim,factory,bottom_data,top_data);</div><div class="line">       top_data += inner_dim_;</div><div class="line">       bottom_data += inner_dim;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (bias_layer_) &#123;</div><div class="line">     bias_layer_-&gt;Forward(bias_bottom_vec_,top);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="Backward-反向计算"><a href="#Backward-反向计算" class="headerlink" title="Backward 反向计算"></a>Backward 反向计算</h4><p>  主要求解三个梯度，对alpha 、beta和输入的bottom(此处的temp)<br>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line">  <span class="keyword">void</span> ScaleLayer&lt;Dtype&gt;::Backward_cpu(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</div><div class="line">  	<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) &#123;</div><div class="line">    <span class="keyword">if</span> (bias_layer_ &amp;&amp;  <span class="comment">// 默认false</span></div><div class="line">      <span class="keyword">this</span>-&gt;param_propagate_down_[<span class="keyword">this</span>-&gt;param_propagate_down_.size()<span class="number">-1</span>]) &#123;</div><div class="line">      bias_layer_-&gt;Backward(top,bias_propagate_down_,bias_bottom_vec_);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">const</span> scale_param = (bottom.size() == <span class="number">1</span>);</div><div class="line">    Blob&lt;Dtype&gt;* scale = scale_param? <span class="keyword">this</span>-&gt;blobs_[<span class="number">0</span>].get(),bottom[<span class="number">1</span>];</div><div class="line">    <span class="keyword">if</span> ((!scale_param &amp;&amp; propagate_down[<span class="number">1</span>])|| <span class="comment">//bottomsize大于1的时候判断</span></div><div class="line">      (scale_param&amp;&amp;<span class="keyword">this</span>-&gt;param_propagate_down_[<span class="number">0</span>])) &#123;<span class="comment">// 1个输入是判断alpha</span></div><div class="line">      <span class="keyword">const</span> Dtype* top_diff = top[<span class="number">0</span>]-&gt;cpu_diff();</div><div class="line">      Dtype* bottom_diff = bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff();</div><div class="line">      <span class="keyword">const</span> in_place = (bottom[<span class="number">0</span>] == top[<span class="number">0</span>]);</div><div class="line">      <span class="comment">// 需要做备份 如果输入输出同名，需要注意用原来临时的temp</span></div><div class="line">      <span class="keyword">const</span> Dtype* bottom_data =in_place?temp_.cpu_data():bottom[<span class="number">0</span>]-&gt;cpu_data();</div><div class="line">      <span class="comment">// BN中输入是NCHW,而alpha和beta仅仅针对C</span></div><div class="line">      <span class="keyword">const</span> <span class="keyword">bool</span> is_eltwise = (bottom[<span class="number">0</span>]-&gt;count() == scale-&gt;count());<span class="comment">//不相等的</span></div><div class="line">      Dtype* product= is_eltwise?scale_.mutable_cpu_diff():</div><div class="line">      (in_place?temp_.mutable_cpu_data():bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff());</div><div class="line">      caffe_mul(top[<span class="number">0</span>]-&gt;count(),top_diff,bottom_data,product);</div><div class="line">      <span class="keyword">if</span> (!is_eltwise) &#123; <span class="comment">// blobs_与输入对不上</span></div><div class="line">        Dtype* sum_result_ = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span> (inner_dim_ == <span class="number">1</span>) &#123;</div><div class="line">          <span class="comment">//H*W == 1;</span></div><div class="line">          sum_result_ = product;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(sum_result_.count() == <span class="number">1</span>)&#123; <span class="comment">// 1*1*1*1</span></div><div class="line">          <span class="keyword">const</span> Dtype* sum_mult_  = sum_multiplier_.cpu_data();</div><div class="line">          Dtype* scale_diff = scale-&gt;mutable_cpu_diff();</div><div class="line">          <span class="keyword">if</span> (scale_param) &#123; <span class="comment">//true</span></div><div class="line">            Dtype result = caffe_cpu_dot(inner_dim,product,sum_mult);</div><div class="line">            *scale_diff += result; <span class="comment">//H*W的相乘</span></div><div class="line">          &#125;</div><div class="line">          <span class="keyword">else</span>&#123;</div><div class="line">            *scale_diff = caffe_cpu_dot(inner_dim_,product,sum_mult);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">          <span class="keyword">const</span> Dtype* sum_mult = sum_multiplier_.mutable_cpu_data();</div><div class="line">          sum_result = (outer_dim_ == <span class="number">1</span>)? <span class="comment">// nc如果n==1就直接幅值C</span></div><div class="line">          scale_.mutable_cpu_diff():sum_result_.mutable_cpu_data();</div><div class="line"></div><div class="line">          <span class="comment">//NC HW  * HW*1 = NC*1 HW全1</span></div><div class="line">          caffe_cpu_gemv&lt;Dtype&gt;(CblasNoTrans,sum_result.count(),inner_dim,</div><div class="line">          Dtype(<span class="number">1</span>),product,sum_mult,Dtype(<span class="number">0</span>),Dtype(<span class="number">0</span>),sum_result);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (out_dim_ != <span class="number">1</span>) &#123;</div><div class="line">           <span class="keyword">const</span> Dtype* sum_mult  = sum_multiplier_.cpu_data();</div><div class="line">           Dtype* scale_diff = scale-&gt;mutable_cpu_diff();</div><div class="line">           <span class="keyword">if</span> (scale_dim_ ==<span class="number">1</span>) &#123;</div><div class="line">             <span class="keyword">if</span> (scale_param) &#123; <span class="comment">// C==1直接计算 NC*NC</span></div><div class="line">                Dtype result = caffe_cpu_dot(outer_dim_,sum_mult_,sum_result);</div><div class="line">                *scale_diff += result;</div><div class="line">             &#125;</div><div class="line">             <span class="keyword">else</span>&#123;</div><div class="line">               *scale_diff =  caffe_cpu_dot(outer_dim_,sum_mult_,sum_result);</div><div class="line">             &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">else</span>&#123;  <span class="comment">//如果C != 1 需要gemv,(num * channels)^t * 1 *num*1</span></div><div class="line">             caffe_cpu_gemv&lt;Dtype&gt;(CblasTrans,outer_dim_,scale_dim,</div><div class="line">             Dtype(<span class="number">1</span>),sum_result,sum_mult,Dtype(scale_param),scale_diff);</div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (propagate_down[<span class="number">0</span>]) &#123; <span class="comment">//x求导</span></div><div class="line">     <span class="keyword">const</span> Dtype* top_diff = top[<span class="number">0</span>]-&gt;cpu_diff();</div><div class="line">     <span class="keyword">const</span> Dtype* scale_data = scale-&gt;cpu_data();</div><div class="line">     Dtype* bottom_diff = bottom[<span class="number">0</span>]-&gt;mutable_cpu_diff();</div><div class="line">     <span class="keyword">for</span> (<span class="keyword">size_t</span> n = <span class="number">0</span>; n &lt; outer_dim_; n++) &#123;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">size_t</span> d = <span class="number">0</span>; d &lt; inner_dim_; d++) &#123;</div><div class="line">          <span class="keyword">const</span> Dtype factory = scale_data[d];</div><div class="line">          caffe_cpu_scale(inner_dim_,factory,top_diff,bottom_diff);</div><div class="line">          bottom_diff += inner_dim_;</div><div class="line">          top_diff += inner_dim_;</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Caffe中的Scale层由于不仅仅作为BN的后续层，因此看着会比较绕，实际去上去掉很多if else 后会清晰很多</p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接：<a href="http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/">http://www.enjoyai.site/2017/11/06/</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/08/MFC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/MFC/" itemprop="url">MFC学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T09:03:49+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MFC/" itemprop="url" rel="index">
+                    <span itemprop="name">MFC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/08/MFC/" class="leancloud_visitors" data-flag-title="MFC学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  127 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="MFC学习"><a href="#MFC学习" class="headerlink" title="MFC学习"></a>MFC学习</h1><p>  慢慢积累$MFC$的知识,多做总结</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>  (1)$MFC$抛出的异常通常为$CDBException$,<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">   <span class="comment">// execute some code</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(CException* ex)&#123;</div><div class="line">  <span class="comment">// Handle the exception here...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  (2) 处理内存分配错误<br>  通常内存分配，比如new分配内存失败时候，程序应当终止，但是也可以通过捕获new异常，进行相应处理。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">size_t</span> count = ~<span class="keyword">static_cast</span>&lt;<span class="keyword">size_t</span>&gt;(<span class="number">0</span>)/<span class="number">2</span>;</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">  <span class="keyword">char</span>* data = <span class="keyword">new</span> <span class="keyword">char</span>[count];</div><div class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"Memory allocated.\n"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">catch</span>(bad_alloc&amp; ex)&#123;</div><div class="line">  <span class="built_in">cout</span>&lt;&lt;<span class="string">"Memory allocation failed.\n"</span>&lt;&lt;<span class="string">"The information from the exception object is:"</span></div><div class="line">  &lt;&lt; ex.what()&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">delete</span>[] data;</div></pre></td></tr></table></figure></p>
+<p>##</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/11/07/目标检测常用衡量指标/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1258,7 +1977,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe Data层分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -1277,7 +1996,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/20/Caffe 激励函数(Activation)分析/" itemprop="url">Caffe NeuronLayer分析</a></h1>
+                <a class="post-title-link" href="/2017/10/20/Caffe Data层分析/" itemprop="url">Caffe DataLayer分析</a></h1>
         
 
         <div class="post-meta">
@@ -1329,7 +2048,7 @@
 
           
           
-             <span id="/2017/10/20/Caffe 激励函数(Activation)分析/" class="leancloud_visitors" data-flag-title="Caffe NeuronLayer分析">
+             <span id="/2017/10/20/Caffe Data层分析/" class="leancloud_visitors" data-flag-title="Caffe DataLayer分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1354,7 +2073,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,180 字
+                  286 字
                 </span>
               
 
@@ -1370,7 +2089,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -1392,768 +2111,16 @@
 
       
         
-          <h3 id="Caffe-NeuronLayer"><a href="#Caffe-NeuronLayer" class="headerlink" title="Caffe_NeuronLayer"></a>Caffe_NeuronLayer</h3><p>  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer<dtype></dtype></p>
-<h4 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1.基本函数"></a>1.基本函数</h4><p>  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">XXXLayer</span><span class="params">(<span class="keyword">const</span> LayerParameter&amp; param)</span></span></div><div class="line">        :NeuronLayer&lt;Dtype&gt;(param)&#123;&#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="string">"layerNane"</span>; &#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/20/Caffe 激励函数(Activation)分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe CommonLayer分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/20/Caffe CommonLayer分析/" itemprop="url">Caffe CommonLayer分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T11:16:01+08:00">
-                2017-10-20
-              </time>
-            
-
-            
-
-            
-          </span>
+          
+            <h3 id="Caffe-DataLayer分析"><a href="#Caffe-DataLayer分析" class="headerlink" title="Caffe DataLayer分析"></a>Caffe DataLayer分析</h3><p>  Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。</p>
+<h4 id="（1）-DataLayer"><a href="#（1）-DataLayer" class="headerlink" title="$（1）\,DataLayer$"></a>$（1）\,DataLayer$</h4><p>  $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等</p>
+<p>1.基本数据成员<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DataRead reader_;<span class="comment">//data_reader.hpp,cpp用以定义读取数据的操作</span></div></pre></td></tr></table></figure></p>
+<p>2.基本成员函数<br>  主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//LayerSetup</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> DataLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; top)&#123;</div><div class="line">  <span class="keyword">const</span> DataParamter&amp; param = <span class="keyword">this</span>-&gt;layer_param_-&gt;data_param();</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> batch_size = param.batch_size();</div><div class="line">  Datum&amp; datum = *(reader_.full().peek()); <span class="comment">//数据库的读取操作</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/20/Caffe CommonLayer分析/" class="leancloud_visitors" data-flag-title="Caffe CommonLayer分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  4,362 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  22 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/20/Caffe CommonLayer分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/19/Caffe_Net/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/Caffe_Net/" itemprop="url">Caffe Net分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T14:42:00+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/19/Caffe_Net/" class="leancloud_visitors" data-flag-title="Caffe Net分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,396 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Caffe-Net"><a href="#Caffe-Net" class="headerlink" title="Caffe_Net"></a>Caffe_Net</h1><h3 id="1-基本数据"><a href="#1-基本数据" class="headerlink" title="1.基本数据"></a>1.基本数据</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">shared_ptr</span>&lt;Layer&lt;Dtype&gt; &gt; &gt; layers_; <span class="comment">// 记录每一层的layer参数</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt; &gt; bottom_vecs_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; bottom_id_vecs_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt; bottom_need_backward_;</div><div class="line"><span class="comment">/// top_vecs stores the vectors containing the output for each layer</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt; &gt; top_vecs_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; top_id_vecs_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; param_id_vecs_;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; layer_names_;</div><div class="line"><span class="comment">//learnable_params_[learnable_param_ids_[i]] == params_[i].get()</span></div><div class="line"><span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt; learnable_params_;<span class="comment">//层间权重与bias</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/19/Caffe_Net/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/19/Caffe_layer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/Caffe_layer/" itemprop="url">Caffe Layer分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T11:31:00+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/19/Caffe_layer/" class="leancloud_visitors" data-flag-title="Caffe Layer分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  755 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://images2017.cnblogs.com/blog/888534/201710/888534-20171019224727334-359802148.png" alt=""></p>
-<h1 id="Caffe-Layers"><a href="#Caffe-Layers" class="headerlink" title="Caffe_Layers"></a>Caffe_Layers</h1><h3 id="1-基本数据结构"><a href="#1-基本数据结构" class="headerlink" title="1.基本数据结构"></a>1.基本数据结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Layer层主要的的参数</span></div><div class="line">LayerParamter layer_param_; <span class="comment">// protobuf内的layer参数</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">shared_ptr</span>&lt;Blob&lt;Dtype&gt;*&gt;&gt;blobs_;<span class="comment">//存储layer的参数，</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;param_propagate_down_;<span class="comment">//表示是否计算各个blobs反向误差。</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/19/Caffe_layer/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/18/Caffe_blob/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/18/Caffe_blob/" itemprop="url">Caffe Blob分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T00:03:10+08:00">
-                2017-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/18/Caffe_blob/" class="leancloud_visitors" data-flag-title="Caffe Blob分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,119 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Caffe-blob"><a href="#Caffe-blob" class="headerlink" title="Caffe_blob"></a>Caffe_blob</h1><h3 id="1-基本数据结构"><a href="#1-基本数据结构" class="headerlink" title="1.基本数据结构"></a>1.基本数据结构</h3><p>  Blob为模板类，可以理解为四维数组，n * c * h * w的结构,Layer内为blob输入data和diff，Layer间的blob为学习的参数.内部封装了SyncedMemory类,该类负责存储分配和主机与设备的同步<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span>:</div><div class="line">    <span class="built_in">shared_ptr</span>&lt;SyncedMemory&gt; data_; <span class="comment">// data指针</span></div><div class="line">    <span class="built_in">shared_ptr</span>&lt;SyncedMemory&gt; diff_; <span class="comment">// diff指针</span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; shape_; <span class="comment">// blob形状</span></div><div class="line">    <span class="keyword">int</span> count_; <span class="comment">// blob的nchw</span></div><div class="line">    <span class="comment">// 当前的Blob容量，当Blob reshape后count&gt; capacity_时，capacity_ = count_;</span></div><div class="line">    <span class="comment">// 重新new 然后 reset data和 diff</span></div><div class="line">    <span class="keyword">int</span> capacity_;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/18/Caffe_blob/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -2240,7 +2207,7 @@
             
               <a href="/archives">
             
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2251,7 +2218,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2262,7 +2229,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
