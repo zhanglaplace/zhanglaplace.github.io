@@ -1,3 +1,3 @@
-http://www.enjoyai.site/2017/11/09/xcenter_loss_layer/
-http://www.enjoyai.site/2017/11/09/hello-world/
 http://www.enjoyai.site/2017/11/09/Caffe_Scale层解析/
+http://www.enjoyai.site/2017/11/07/目标检测常用衡量指标/
+http://www.enjoyai.site/2017/11/06/Caffe_BatchNormalization/
