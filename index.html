@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,049 字
+                  1,056 字
                 </span>
               
 
@@ -451,7 +451,7 @@
           
             <h1 id="Caffe安装"><a href="#Caffe安装" class="headerlink" title="Caffe安装"></a>Caffe安装</h1><p>  实际上在windows上安装过多次caffe了，无论是BLVC版本的还是Microsoft版本的，ubuntu的按照也进行过，这段时间在自己笔记本上<br>又折腾了下caffe安装，发现其实直接照着官方的是最方便快捷的。<br>  具体可以参照 <a href="http://caffe.berkeleyvision.org/install_apt.html" target="_blank" rel="external">Installation_instructions</a></p>
 <h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><p>  根据系统的不同，ubuntu分为两种安装方式。Ubuntu17.04以即上的可以直接apt-get<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt install caffe-cpu # cpu only</div><div class="line">sudo apt install caffe-cuda # gpu</div></pre></td></tr></table></figure></p>
-<p>  其他版本的ubuntu也可以分为两种方式安装，但是依赖项是必须的，本文仅介绍简易的软件源中快速安装。源码安装可以参考本人的另外一篇博客：<img src="http://www.cnblogs.com/LaplaceAkuir/p/6262632.html" alt="ubunt16.04 cud8.0 caffe 安装"></p>
+<p>  其他版本的ubuntu也可以分为两种方式安装，但是依赖项是必须的，本文仅介绍简易的软件源中快速安装。源码安装可以参考本人的另外一篇博客：<a href="http://www.cnblogs.com/LaplaceAkuir/p/6262632.html" target="_blank" rel="external">ubunt16.04 cud8.0 caffe 安装</a></p>
 <h2 id="Nvidia显卡驱动"><a href="#Nvidia显卡驱动" class="headerlink" title="Nvidia显卡驱动"></a>Nvidia显卡驱动</h2><p>  由于要使用GPU，所以先要查看自己显卡所匹配的显卡驱动，网址：<a href="http://www.nvidia.com/Download/index.aspx?lang=en-us" target="_blank" rel="external">nvidia</a> ,下载run文件。<br>  由于目前显卡和cuda更新迅速，容易造成笔记本循环登录，因此安装显卡驱动是关闭图形界面。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> ctrl +alt +F1 进入tty1，</div><div class="line">sudo service lightdm stop</div><div class="line">sudo ./Nvidia-.....run 执行安装</div><div class="line">sudo reboot</div></pre></td></tr></table></figure></p>
 <h2 id="Cuda和CuDnn"><a href="#Cuda和CuDnn" class="headerlink" title="Cuda和CuDnn"></a>Cuda和CuDnn</h2><p>  安装较为简单，官网下载，在安装cuda是需要注意显卡安装选项选择no即可</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">sudo sh cuda_8.0.44_linux.run --override</div><div class="line"><span class="meta">#</span> 安装结束后</div><div class="line">sudo vim ~/.bashrc  //末尾添加</div><div class="line">export CUDA_HOME=/usr/local/cuda-8.0</div><div class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</div><div class="line">export PATH=/usr/local/cuda-8.0/bin:$PATH</div><div class="line">source ~/.bashrc</div><div class="line"></div><div class="line"><span class="meta">#</span> 测试</div><div class="line">cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery</div><div class="line">make -j32</div><div class="line">sudo ./deviceQuery</div></pre></td></tr></table></figure>
@@ -1647,6 +1647,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangLaplace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangFeng's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/20/Caffe 激励函数(Activation)分析/" itemprop="url">Caffe NeuronLayer分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T11:16:01+08:00">
+                2017-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">Caffe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/20/Caffe 激励函数(Activation)分析/" class="leancloud_visitors" data-flag-title="Caffe NeuronLayer分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,180 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Caffe-NeuronLayer"><a href="#Caffe-NeuronLayer" class="headerlink" title="Caffe_NeuronLayer"></a>Caffe_NeuronLayer</h3><p>  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer<dtype></dtype></p>
+<h4 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1.基本函数"></a>1.基本函数</h4><p>  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">XXXLayer</span><span class="params">(<span class="keyword">const</span> LayerParameter&amp; param)</span></span></div><div class="line">        :NeuronLayer&lt;Dtype&gt;(param)&#123;&#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="string">"layerNane"</span>; &#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/20/Caffe 激励函数(Activation)分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe Data层分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1791,195 +1980,6 @@
 </blockquote>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe 激励函数(Activation)分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangLaplace">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangFeng's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/20/Caffe 激励函数(Activation)分析/" itemprop="url">Caffe NeuronLayer分析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T11:16:01+08:00">
-                2017-10-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Caffe/" itemprop="url" rel="index">
-                    <span itemprop="name">Caffe</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/20/Caffe 激励函数(Activation)分析/" class="leancloud_visitors" data-flag-title="Caffe NeuronLayer分析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,180 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Caffe-NeuronLayer"><a href="#Caffe-NeuronLayer" class="headerlink" title="Caffe_NeuronLayer"></a>Caffe_NeuronLayer</h3><p>  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer<dtype></dtype></p>
-<h4 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1.基本函数"></a>1.基本函数</h4><p>  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">explicit</span> <span class="title">XXXLayer</span><span class="params">(<span class="keyword">const</span> LayerParameter&amp; param)</span></span></div><div class="line">        :NeuronLayer&lt;Dtype&gt;(param)&#123;&#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">type</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> <span class="string">"layerNane"</span>; &#125;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Forward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,</span></span></div><div class="line"><span class="function"><span class="params">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_cpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div><div class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Backward_gpu</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,</span></span></div><div class="line"><span class="function"><span class="params">    <span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&amp; propagate_down, <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom)</span></span>;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/20/Caffe 激励函数(Activation)分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
