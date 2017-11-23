@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.enjoyai.site/2017/11/23/InstallOpenCV/</loc>
+    <lastmod>2017-11-23T13:32:52.645Z</lastmod>
+    <data>
+        <display>
+        <title>OpenCV3 安装</title>
+        <pubTime>2017-11-23T07:40:10.000Z</pubTime>
+        
+        <tag>OpenCV</tag>
+         
+        <tag>Ubuntu</tag>
+         
+         
+           
+             
+              <breadCrumb title="Opencv" url="http://www.enjoyai.site/categories/Opencv/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.enjoyai.site/2017/11/21/InstallCaffe/</loc>
-    <lastmod>2017-11-22T14:39:16.078Z</lastmod>
+    <lastmod>2017-11-23T13:08:20.323Z</lastmod>
     <data>
         <display>
         <title>Caffe 安装分析</title>
