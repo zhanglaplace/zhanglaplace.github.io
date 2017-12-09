@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="ZhangFeng&#39;s Blog">
 <meta property="og:description" content="概述  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表:    modelStrut Gpu Memory Batch_size Accurac">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-04T14:13:15.968Z">
+<meta property="og:updated_time" content="2017-12-09T15:50:43.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Caffe经典网络-cifar10验证">
 <meta name="twitter:description" content="概述  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表:    modelStrut Gpu Memory Batch_size Accurac">
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  219 字
+                  325 字
                 </span>
               
 
@@ -467,7 +467,7 @@
 <td style="text-align:center">0.7243</td>
 <td style="text-align:center">3.0M</td>
 <td style="text-align:center">~7min</td>
-<td></td>
+<td>~0.67ms</td>
 </tr>
 <tr>
 <td style="text-align:center">LeNet</td>
@@ -476,7 +476,7 @@
 <td style="text-align:center">0.7840</td>
 <td style="text-align:center">~0.35M</td>
 <td style="text-align:center">~28min</td>
-<td></td>
+<td>~0.84ms</td>
 </tr>
 <tr>
 <td style="text-align:center">BN-LeNet</td>
@@ -485,16 +485,7 @@
 <td style="text-align:center">0.7985</td>
 <td style="text-align:center">~0.35M</td>
 <td style="text-align:center">~16min</td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:center">VGG16</td>
-<td style="text-align:center">~1.3G</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td></td>
+<td>~0.86ms</td>
 </tr>
 <tr>
 <td style="text-align:center">SqeezeNet_v1.1</td>
@@ -503,7 +494,7 @@
 <td style="text-align:center">0.8030</td>
 <td style="text-align:center">~2.8M</td>
 <td style="text-align:center">~30min</td>
-<td></td>
+<td>~3.02ms</td>
 </tr>
 <tr>
 <td style="text-align:center">ResNet20</td>
@@ -512,7 +503,7 @@
 <td style="text-align:center">0.8303</td>
 <td style="text-align:center">~1.1M</td>
 <td style="text-align:center">~1h5min</td>
-<td></td>
+<td>~4.55ms</td>
 </tr>
 <tr>
 <td style="text-align:center">ResNet32</td>
@@ -521,34 +512,34 @@
 <td style="text-align:center">0.8741</td>
 <td style="text-align:center">~1.9M</td>
 <td style="text-align:center">~1h53min</td>
-<td></td>
+<td>~6.91ms</td>
 </tr>
 <tr>
 <td style="text-align:center">ResNet56</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td></td>
+<td style="text-align:center">~4.0G</td>
+<td style="text-align:center">128+128</td>
+<td style="text-align:center">0.8830</td>
+<td style="text-align:center">~3.4M</td>
+<td style="text-align:center">~3h20min</td>
+<td>~11.65ms</td>
 </tr>
 <tr>
 <td style="text-align:center">WRN28_10</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td></td>
+<td style="text-align:center">~10.5G</td>
+<td style="text-align:center">64+128</td>
+<td style="text-align:center">0.8905</td>
+<td style="text-align:center">~140M</td>
+<td style="text-align:center">~12h55min</td>
+<td>~9.31ms</td>
 </tr>
 <tr>
 <td style="text-align:center">Dense30</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td></td>
+<td style="text-align:center">~10.0G</td>
+<td style="text-align:center">32+64</td>
+<td style="text-align:center">0.9195</td>
+<td style="text-align:center">~4.0M</td>
+<td style="text-align:center">~3h38min</td>
+<td>~14.73ms</td>
 </tr>
 <tr>
 <td style="text-align:center">NIN</td>
@@ -557,7 +548,7 @@
 <td style="text-align:center">0.8411</td>
 <td style="text-align:center">~25M</td>
 <td style="text-align:center">~46min</td>
-<td></td>
+<td>~1.99ms</td>
 </tr>
 <tr>
 <td style="text-align:center">GoolgeNet</td>
@@ -566,19 +557,48 @@
 <td style="text-align:center">0.7865</td>
 <td style="text-align:center">~25M</td>
 <td style="text-align:center">~30min</td>
-<td></td>
-</tr>
-<tr>
-<td style="text-align:center">Ourself(28residual</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
+<td>~8.42ms</td>
 </tr>
 </tbody>
 </table>
-<p>说明：由于训练的时候节省时间，有的网络一起开始训练的，因此显存占用与训练时间可能与单个测试的时间有差异</p>
+<a id="more"></a>
+<p>说明：由于训练的时候节省时间，有的网络一起开始训练的，因此显存占用与训练，测试时间可能与单个测试的时间有差异.</p>
+<table>
+<thead>
+<tr>
+<th>modelStruct</th>
+<th>Gpu Memory</th>
+<th>Batch_size</th>
+<th>mAp</th>
+<th>model_size</th>
+<th>train_time</th>
+<th>test time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MobileNet SSD</td>
+<td>~7.4G</td>
+<td>24+8</td>
+<td>0.7243</td>
+<td>~23M</td>
+<td>25k–~17h</td>
+<td>~60ms</td>
+</tr>
+<tr>
+<td>faceBox</td>
+<td>~7.7G</td>
+<td>8+4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>##</p>
+<blockquote>
+<p>本文作者： 张峰<br>本文链接：[<a href="http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/">http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/</a> )<br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>

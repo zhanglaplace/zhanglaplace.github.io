@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.enjoyai.site/"/>
-  <updated>2017-12-04T14:13:15.968Z</updated>
+  <updated>2017-12-09T15:50:43.507Z</updated>
   <id>http://www.enjoyai.site/</id>
   
   <author>
@@ -21,16 +21,127 @@
     <link href="http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/"/>
     <id>http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/</id>
     <published>2017-12-04T03:44:00.000Z</published>
-    <updated>2017-12-04T14:13:15.968Z</updated>
+    <updated>2017-12-09T15:50:43.507Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表:</p><table><thead><tr><th style="text-align:center">modelStrut</th><th style="text-align:center">Gpu Memory</th><th style="text-align:center">Batch_size</th><th style="text-align:center">Accuracy</th><th style="text-align:center">model Size</th><th style="text-align:center">train time</th><th>test time</th></tr></thead><tbody><tr><td style="text-align:center">Alex</td><td style="text-align:center">~0.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7243</td><td style="text-align:center">3.0M</td><td style="text-align:center">~7min</td><td></td></tr><tr><td style="text-align:center">LeNet</td><td style="text-align:center">~0.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7840</td><td style="text-align:center">~0.35M</td><td style="text-align:center">~28min</td><td></td></tr><tr><td style="text-align:center">BN-LeNet</td><td style="text-align:center">~1.35G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7985</td><td style="text-align:center">~0.35M</td><td style="text-align:center">~16min</td><td></td></tr><tr><td style="text-align:center">VGG16</td><td style="text-align:center">~1.3G</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td></td></tr><tr><td style="text-align:center">SqeezeNet_v1.1</td><td style="text-align:center">~1.25G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8030</td><td style="text-align:center">~2.8M</td><td style="text-align:center">~30min</td><td></td></tr><tr><td style="text-align:center">ResNet20</td><td style="text-align:center">~1.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8303</td><td style="text-align:center">~1.1M</td><td style="text-align:center">~1h5min</td><td></td></tr><tr><td style="text-align:center">ResNet32</td><td style="text-align:center">~2.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8741</td><td style="text-align:center">~1.9M</td><td style="text-align:center">~1h53min</td><td></td></tr><tr><td style="text-align:center">ResNet56</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td></td></tr><tr><td style="text-align:center">WRN28_10</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td></td></tr><tr><td style="text-align:center">Dense30</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td></td></tr><tr><td style="text-align:center">NIN</td><td style="text-align:center">~1.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8411</td><td style="text-align:center">~25M</td><td style="text-align:center">~46min</td><td></td></tr><tr><td style="text-align:center">GoolgeNet</td><td style="text-align:center">~1.3G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7865</td><td style="text-align:center">~25M</td><td style="text-align:center">~30min</td><td></td></tr><tr><td style="text-align:center">Ourself(28residual</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr></tbody></table><p>说明：由于训练的时候节省时间，有的网络一起开始训练的，因此显存占用与训练时间可能与单个测试的时间有差异</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表:</p><table><thead><tr><th style="text-align:center">modelStrut</th><th style="text-align:center">Gpu Memory</th><th style="text-align:center">Batch_size</th><th style="text-align:center">Accuracy</th><th style="text-align:center">model Size</th><th style="text-align:center">train time</th><th>test time</th></tr></thead><tbody><tr><td style="text-align:center">Alex</td><td style="text-align:center">~0.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7243</td><td style="text-align:center">3.0M</td><td style="text-align:center">~7min</td><td>~0.67ms</td></tr><tr><td style="text-align:center">LeNet</td><td style="text-align:center">~0.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7840</td><td style="text-align:center">~0.35M</td><td style="text-align:center">~28min</td><td>~0.84ms</td></tr><tr><td style="text-align:center">BN-LeNet</td><td style="text-align:center">~1.35G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7985</td><td style="text-align:center">~0.35M</td><td style="text-align:center">~16min</td><td>~0.86ms</td></tr><tr><td style="text-align:center">SqeezeNet_v1.1</td><td style="text-align:center">~1.25G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8030</td><td style="text-align:center">~2.8M</td><td style="text-align:center">~30min</td><td>~3.02ms</td></tr><tr><td style="text-align:center">ResNet20</td><td style="text-align:center">~1.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8303</td><td style="text-align:center">~1.1M</td><td style="text-align:center">~1h5min</td><td>~4.55ms</td></tr><tr><td style="text-align:center">ResNet32</td><td style="text-align:center">~2.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8741</td><td style="text-align:center">~1.9M</td><td style="text-align:center">~1h53min</td><td>~6.91ms</td></tr><tr><td style="text-align:center">ResNet56</td><td style="text-align:center">~4.0G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8830</td><td style="text-align:center">~3.4M</td><td style="text-align:center">~3h20min</td><td>~11.65ms</td></tr><tr><td style="text-align:center">WRN28_10</td><td style="text-align:center">~10.5G</td><td style="text-align:center">64+128</td><td style="text-align:center">0.8905</td><td style="text-align:center">~140M</td><td style="text-align:center">~12h55min</td><td>~9.31ms</td></tr><tr><td style="text-align:center">Dense30</td><td style="text-align:center">~10.0G</td><td style="text-align:center">32+64</td><td style="text-align:center">0.9195</td><td style="text-align:center">~4.0M</td><td style="text-align:center">~3h38min</td><td>~14.73ms</td></tr><tr><td style="text-align:center">NIN</td><td style="text-align:center">~1.5G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.8411</td><td style="text-align:center">~25M</td><td style="text-align:center">~46min</td><td>~1.99ms</td></tr><tr><td style="text-align:center">GoolgeNet</td><td style="text-align:center">~1.3G</td><td style="text-align:center">128+128</td><td style="text-align:center">0.7865</td><td style="text-align:center">~25M</td><td style="text-align:center">~30min</td><td>~8.42ms</td></tr></tbody></table><a id="more"></a><p>说明：由于训练的时候节省时间，有的网络一起开始训练的，因此显存占用与训练，测试时间可能与单个测试的时间有差异.</p><table><thead><tr><th>modelStruct</th><th>Gpu Memory</th><th>Batch_size</th><th>mAp</th><th>model_size</th><th>train_time</th><th>test time</th></tr></thead><tbody><tr><td>MobileNet SSD</td><td>~7.4G</td><td>24+8</td><td>0.7243</td><td>~23M</td><td>25k–~17h</td><td>~60ms</td></tr><tr><td>faceBox</td><td>~7.7G</td><td>8+4</td><td></td><td></td><td></td></tr></tbody></table><p>##</p><blockquote><p>本文作者： 张峰<br>本文链接：[<a href="http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/">http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/</a> )<br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p></blockquote>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比
-      
+      &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;  本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;modelStrut&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Gpu Memory&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Batch_size&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Accuracy&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;model Size&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;train time&lt;/th&gt;
+&lt;th&gt;test time&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Alex&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~0.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.7243&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;3.0M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~7min&lt;/td&gt;
+&lt;td&gt;~0.67ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;LeNet&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~0.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.7840&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~0.35M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~28min&lt;/td&gt;
+&lt;td&gt;~0.84ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;BN-LeNet&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.35G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.7985&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~0.35M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~16min&lt;/td&gt;
+&lt;td&gt;~0.86ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;SqeezeNet_v1.1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.25G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8030&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~2.8M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~30min&lt;/td&gt;
+&lt;td&gt;~3.02ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;ResNet20&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8303&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.1M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1h5min&lt;/td&gt;
+&lt;td&gt;~4.55ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;ResNet32&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~2.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8741&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.9M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1h53min&lt;/td&gt;
+&lt;td&gt;~6.91ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;ResNet56&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~4.0G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8830&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~3.4M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~3h20min&lt;/td&gt;
+&lt;td&gt;~11.65ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;WRN28_10&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~10.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;64+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8905&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~140M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~12h55min&lt;/td&gt;
+&lt;td&gt;~9.31ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;Dense30&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~10.0G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;32+64&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.9195&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~4.0M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~3h38min&lt;/td&gt;
+&lt;td&gt;~14.73ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;NIN&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.5G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.8411&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~25M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~46min&lt;/td&gt;
+&lt;td&gt;~1.99ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;GoolgeNet&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~1.3G&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;128+128&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.7865&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~25M&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;~30min&lt;/td&gt;
+&lt;td&gt;~8.42ms&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
     
     </summary>
     
@@ -244,33 +355,6 @@
   </entry>
   
   <entry>
-    <title>Caffe DataLayer分析</title>
-    <link href="http://www.enjoyai.site/2017/10/20/Caffe%20Data%E5%B1%82%E5%88%86%E6%9E%90/"/>
-    <id>http://www.enjoyai.site/2017/10/20/Caffe Data层分析/</id>
-    <published>2017-10-20T03:16:01.000Z</published>
-    <updated>2017-11-06T14:35:26.197Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Caffe-DataLayer分析"><a href="#Caffe-DataLayer分析" class="headerlink" title="Caffe DataLayer分析"></a>Caffe DataLayer分析</h3><p>  Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。</p><h4 id="（1）-DataLayer"><a href="#（1）-DataLayer" class="headerlink" title="$（1）\,DataLayer$"></a>$（1）\,DataLayer$</h4><p>  $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等</p><p>1.基本数据成员<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DataRead reader_;<span class="comment">//data_reader.hpp,cpp用以定义读取数据的操作</span></div></pre></td></tr></table></figure></p><p>2.基本成员函数<br>  主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//LayerSetup</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> DataLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; top)&#123;</div><div class="line">  <span class="keyword">const</span> DataParamter&amp; param = <span class="keyword">this</span>-&gt;layer_param_-&gt;data_param();</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> batch_size = param.batch_size();</div><div class="line">  Datum&amp; datum = *(reader_.full().peek()); <span class="comment">//数据库的读取操作</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p><blockquote><p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Caffe-DataLayer分析&quot;&gt;&lt;a href=&quot;#Caffe-DataLayer分析&quot; class=&quot;headerlink&quot; title=&quot;Caffe DataLayer分析&quot;&gt;&lt;/a&gt;Caffe DataLayer分析&lt;/h3&gt;&lt;p&gt;  Caffe的$d
-      
-    
-    </summary>
-    
-      <category term="Caffe" scheme="http://www.enjoyai.site/categories/Caffe/"/>
-    
-    
-      <category term="DeepLearning" scheme="http://www.enjoyai.site/tags/DeepLearning/"/>
-    
-      <category term="Caffe" scheme="http://www.enjoyai.site/tags/Caffe/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Caffe CommonLayer分析</title>
     <link href="http://www.enjoyai.site/2017/10/20/Caffe%20CommonLayer%E5%88%86%E6%9E%90/"/>
     <id>http://www.enjoyai.site/2017/10/20/Caffe CommonLayer分析/</id>
@@ -307,6 +391,33 @@
     
       &lt;h3 id=&quot;Caffe-NeuronLayer&quot;&gt;&lt;a href=&quot;#Caffe-NeuronLayer&quot; class=&quot;headerlink&quot; title=&quot;Caffe_NeuronLayer&quot;&gt;&lt;/a&gt;Caffe_NeuronLayer&lt;/h3&gt;&lt;p&gt;  一般来说，激励层的输入输出尺寸一致，为非线性函数，完成非线性映射，从而能够拟合更为复杂的函数表达式激励层都派生于NeuronLayer: class XXXlayer : public NeuronLayer&lt;dtype&gt;&lt;/dtype&gt;&lt;/p&gt;
 &lt;h4 id=&quot;1-基本函数&quot;&gt;&lt;a href=&quot;#1-基本函数&quot; class=&quot;headerlink&quot; title=&quot;1.基本函数&quot;&gt;&lt;/a&gt;1.基本函数&lt;/h4&gt;&lt;p&gt;  激励层的基本函数较为简单，主要包含构造函数和前向、后向函数&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;explicit&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;XXXLayer&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; LayerParameter&amp;amp; param)&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        :NeuronLayer&amp;lt;Dtype&amp;gt;(param)&amp;#123;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;inline&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;char&lt;/span&gt;* &lt;span class=&quot;title&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;/span&gt;&amp;#123; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;layerNane&quot;&lt;/span&gt;; &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Forward_cpu&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; bottom,&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; top)&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Forward_gpu&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; bottom,&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; top)&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Backward_cpu&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; top,&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt;&amp;gt;&amp;amp; propagate_down, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; bottom)&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;virtual&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Backward_gpu&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; top,&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;&lt;span class=&quot;keyword&quot;&gt;bool&lt;/span&gt;&amp;gt;&amp;amp; propagate_down, &lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;vector&lt;/span&gt;&amp;lt;Blob&amp;lt;Dtype&amp;gt;*&amp;gt;&amp;amp; bottom)&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Caffe" scheme="http://www.enjoyai.site/categories/Caffe/"/>
+    
+    
+      <category term="DeepLearning" scheme="http://www.enjoyai.site/tags/DeepLearning/"/>
+    
+      <category term="Caffe" scheme="http://www.enjoyai.site/tags/Caffe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Caffe DataLayer分析</title>
+    <link href="http://www.enjoyai.site/2017/10/20/Caffe%20Data%E5%B1%82%E5%88%86%E6%9E%90/"/>
+    <id>http://www.enjoyai.site/2017/10/20/Caffe Data层分析/</id>
+    <published>2017-10-20T03:16:01.000Z</published>
+    <updated>2017-11-06T14:35:26.197Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Caffe-DataLayer分析"><a href="#Caffe-DataLayer分析" class="headerlink" title="Caffe DataLayer分析"></a>Caffe DataLayer分析</h3><p>  Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。</p><h4 id="（1）-DataLayer"><a href="#（1）-DataLayer" class="headerlink" title="$（1）\,DataLayer$"></a>$（1）\,DataLayer$</h4><p>  $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等</p><p>1.基本数据成员<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DataRead reader_;<span class="comment">//data_reader.hpp,cpp用以定义读取数据的操作</span></div></pre></td></tr></table></figure></p><p>2.基本成员函数<br>  主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//LayerSetup</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> DataLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; top)&#123;</div><div class="line">  <span class="keyword">const</span> DataParamter&amp; param = <span class="keyword">this</span>-&gt;layer_param_-&gt;data_param();</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> batch_size = param.batch_size();</div><div class="line">  Datum&amp; datum = *(reader_.full().peek()); <span class="comment">//数据库的读取操作</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p><blockquote><p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Caffe-DataLayer分析&quot;&gt;&lt;a href=&quot;#Caffe-DataLayer分析&quot; class=&quot;headerlink&quot; title=&quot;Caffe DataLayer分析&quot;&gt;&lt;/a&gt;Caffe DataLayer分析&lt;/h3&gt;&lt;p&gt;  Caffe的$d
+      
     
     </summary>
     
