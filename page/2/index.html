@@ -503,7 +503,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe Data层分析/">
+    <link itemprop="mainEntityOfPage" href="http://www.enjoyai.site/2017/10/20/Caffe CommonLayer分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangLaplace">
@@ -522,7 +522,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/20/Caffe Data层分析/" itemprop="url">Caffe DataLayer分析</a></h1>
+                <a class="post-title-link" href="/2017/10/20/Caffe CommonLayer分析/" itemprop="url">Caffe CommonLayer分析</a></h1>
         
 
         <div class="post-meta">
@@ -574,7 +574,7 @@
 
           
           
-             <span id="/2017/10/20/Caffe Data层分析/" class="leancloud_visitors" data-flag-title="Caffe DataLayer分析">
+             <span id="/2017/10/20/Caffe CommonLayer分析/" class="leancloud_visitors" data-flag-title="Caffe CommonLayer分析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -599,7 +599,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  286 字
+                  4,362 字
                 </span>
               
 
@@ -615,7 +615,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  22 分钟
                 </span>
               
             </div>
@@ -637,16 +637,14 @@
 
       
         
-          
-            <h3 id="Caffe-DataLayer分析"><a href="#Caffe-DataLayer分析" class="headerlink" title="Caffe DataLayer分析"></a>Caffe DataLayer分析</h3><p>  Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。</p>
-<h4 id="（1）-DataLayer"><a href="#（1）-DataLayer" class="headerlink" title="$（1）\,DataLayer$"></a>$（1）\,DataLayer$</h4><p>  $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等</p>
-<p>1.基本数据成员<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DataRead reader_;<span class="comment">//data_reader.hpp,cpp用以定义读取数据的操作</span></div></pre></td></tr></table></figure></p>
-<p>2.基本成员函数<br>  主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//LayerSetup</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Dtype&gt;</div><div class="line"><span class="keyword">void</span> DataLayer&lt;Dtype&gt;::LayerSetup(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; bottom,</div><div class="line">  <span class="keyword">const</span> <span class="built_in">vector</span>&lt;Blob&gt;*&gt;&amp; top)&#123;</div><div class="line">  <span class="keyword">const</span> DataParamter&amp; param = <span class="keyword">this</span>-&gt;layer_param_-&gt;data_param();</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> batch_size = param.batch_size();</div><div class="line">  Datum&amp; datum = *(reader_.full().peek()); <span class="comment">//数据库的读取操作</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>本文作者： 张峰<br>本文链接：<a href="https://zhanglaplace.github.io/2017/10/20/Caffe%20Loss%E5%88%86%E6%9E%90/" target="_blank" rel="external">https://zhanglaplace.github.io/2017/10/20</a><br>版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
-</blockquote>
-
-          
+          <h3 id="Caffe-CommonLayer分析"><a href="#Caffe-CommonLayer分析" class="headerlink" title="Caffe CommonLayer分析"></a>Caffe CommonLayer分析</h3><p>  $Caffe$中包含了很多通用的功能层，包含了$concat$,$slice$,$split$,$crop$,$flip$,$scale_layer$等,这些层在网络中经常被使用，本文也将对其中的常见layer进行说明与源码分析。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/20/Caffe CommonLayer分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
