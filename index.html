@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  960 字
+                  946 字
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -449,7 +449,7 @@
       
         
           
-            <h1 id="acmi-2015-Image-based-Static-Facial-Expression-Recognition-with-Multiple-Deep-Network-Learning"><a href="#acmi-2015-Image-based-Static-Facial-Expression-Recognition-with-Multiple-Deep-Network-Learning" class="headerlink" title="[acmi 2015]Image based Static Facial Expression Recognition with Multiple Deep Network Learning"></a>[acmi 2015]Image based Static Facial Expression Recognition with Multiple Deep Network Learning</h1><h3 id="ABSTRACT"><a href="#ABSTRACT" class="headerlink" title="ABSTRACT"></a>ABSTRACT</h3><p>  该文章作者为EmotiW2015比赛静态表情识别的亚军，采用的方法为cnn的级联，人脸检测方面也采用了当时3种算法的共同检测，<br>通过在FER2013数据库上进行模型预训练，并在SFEW2.0（比赛数据）上fine-tune,从而在比赛的验证集和测试集上取得55.96%和61.29%<br>的准确率,远远超过比赛的baseline(35.96%，39.13%)。<br>  作者本文主要贡献如下:</p>
+            <h3 id="ABSTRACT"><a href="#ABSTRACT" class="headerlink" title="ABSTRACT"></a>ABSTRACT</h3><p>  该文章作者为EmotiW2015比赛静态表情识别的亚军，采用的方法为cnn的级联，人脸检测方面也采用了当时3种算法的共同检测，<br>通过在FER2013数据库上进行模型预训练，并在SFEW2.0（比赛数据）上fine-tune,从而在比赛的验证集和测试集上取得55.96%和61.29%<br>的准确率,远远超过比赛的baseline(35.96%，39.13%)。<br>  作者本文主要贡献如下:</p>
 <ul>
 <li>1.实现了CNN架构，在表情识别方面性能卓越。</li>
 <li>2.提出了一种数据增强和投票模式，应有提高CNN的性能。</li>
@@ -484,7 +484,7 @@
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>  作者分别列出了在FER,SFEW上数据库的单独训练结果以及，采用提升的级联方式对最终结果的提高。<br> <img src="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_4.png" alt="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_4.png"><br> $$ FER数据集train \, val结果 $$<br>  <img src="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_5.png" alt="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_5.png"><br>   $$ FER数据集不同Loss与级联方式的结果 $$<br>  <img src="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_6.png" alt="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_6.png"><br>  $$ SFEW数据集Vote \, No Vote的结果 $$<br>  <img src="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_7.png" alt="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_7.png"><br>  $$ SFEW数据集不同Loss与级联方式的结果 $$<br> <img src="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_8.png" alt="https://github.com/zhanglaplace/PaperPaper/blob/master/Expression/imgs/%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning_8.png"><br>  $$ SFEW数据库上的测试混淆矩阵 $$</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>  预训练+提升的级联方式对最终的识别效果有效。同时，样本扩增对实验提升也是有作用的。</p>
 <blockquote>
-<p>本文作者： 张峰<br>本文链接： <a href="http://www.enjoyai.site/2018/01/08/InstallCaffe/">http://www.enjoyai.site/2018/01/08/InstallCaffe/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+<p>本文作者： 张峰<br>本文链接： <a href="http://www.enjoyai.site/2018/01/08/[acmi%202015]Image%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning/">http://www.enjoyai.site/2018/01/08/</a><br>版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
 </blockquote>
 
           
