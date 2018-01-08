@@ -1,3 +1,3 @@
-http://www.enjoyai.site/2018/01/08/[acmi 2015]Image based Static Facial Expression Recognition with Multiple Deep Network Learning/
+http://www.enjoyai.site/2018/01/08/Image based Static Facial Expression Recognition with Multiple Deep Network Learning/
 http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/
 http://www.enjoyai.site/2017/11/23/InstallOpenCV/
