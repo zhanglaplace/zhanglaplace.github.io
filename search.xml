@@ -8,8 +8,8 @@
         <category>Facial Expression</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Facial Expression</tag>
+        <tag>DeepLearning</tag>
         <tag>Face Recognition</tag>
       </tags>
   </entry>
@@ -33,8 +33,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -45,8 +45,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -57,8 +57,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -69,8 +69,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -81,8 +81,8 @@
         <category>Facial Expression</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Facial Expression</tag>
+        <tag>DeepLearning</tag>
         <tag>Face Recognition</tag>
       </tags>
   </entry>
@@ -94,8 +94,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -106,20 +106,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Caffe DataLayer分析]]></title>
-    <url>%2F2017%2F10%2F20%2FCaffe%20Data%E5%B1%82%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[Caffe DataLayer分析 Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。 $（1）\,DataLayer$ $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等 1.基本数据成员1DataRead reader_;//data_reader.hpp,cpp用以定义读取数据的操作 2.基本成员函数 主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始123456789101112//LayerSetuptemplate &lt;typename Dtype&gt;void DataLayer&lt;Dtype&gt;::LayerSetup(const vector&lt;Blob&gt;*&gt;&amp; bottom, const vector&lt;Blob&gt;*&gt;&amp; top)&#123; const DataParamter&amp; param = this-&gt;layer_param_-&gt;data_param(); const int batch_size = param.batch_size(); Datum&amp; datum = *(reader_.full().peek()); //数据库的读取操作&#125; 本文作者： 张峰本文链接：https://zhanglaplace.github.io/2017/10/20版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
-      <categories>
-        <category>Caffe</category>
-      </categories>
-      <tags>
         <tag>Caffe</tag>
-        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -130,8 +118,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -142,8 +130,20 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Caffe DataLayer分析]]></title>
+    <url>%2F2017%2F10%2F20%2FCaffe%20Data%E5%B1%82%E5%88%86%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[Caffe DataLayer分析 Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。 $（1）\,DataLayer$ $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等 1.基本数据成员1DataRead reader_;//data_reader.hpp,cpp用以定义读取数据的操作 2.基本成员函数 主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始123456789101112//LayerSetuptemplate &lt;typename Dtype&gt;void DataLayer&lt;Dtype&gt;::LayerSetup(const vector&lt;Blob&gt;*&gt;&amp; bottom, const vector&lt;Blob&gt;*&gt;&amp; top)&#123; const DataParamter&amp; param = this-&gt;layer_param_-&gt;data_param(); const int batch_size = param.batch_size(); Datum&amp; datum = *(reader_.full().peek()); //数据库的读取操作&#125; 本文作者： 张峰本文链接：https://zhanglaplace.github.io/2017/10/20版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
+      <categories>
+        <category>Caffe</category>
+      </categories>
+      <tags>
+        <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -154,8 +154,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -166,8 +166,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -178,8 +178,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>DeepLearning</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
