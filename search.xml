@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[acmi 2015 Image based Static Facial Expression Recognition with Multiple Deep Network Learning]]></title>
+    <url>%2F2018%2F01%2F08%2F%5Bacmi%202015%5DImage%20based%20Static%20Facial%20Expression%20Recognition%20with%20Multiple%20Deep%20Network%20Learning%2F</url>
+    <content type="text"><![CDATA[[acmi 2015]Image based Static Facial Expression Recognition with Multiple Deep Network LearningABSTRACT 该文章作者为EmotiW2015比赛静态表情识别的亚军，采用的方法为cnn的级联，人脸检测方面也采用了当时3种算法的共同检测，通过在FER2013数据库上进行模型预训练，并在SFEW2.0（比赛数据）上fine-tune,从而在比赛的验证集和测试集上取得55.96%和61.29%的准确率,远远超过比赛的baseline(35.96%，39.13%)。 作者本文主要贡献如下: 1.实现了CNN架构，在表情识别方面性能卓越。 2.提出了一种数据增强和投票模式，应有提高CNN的性能。 3.提出了一种优化方法自动的决定级联CNN的权重分配问题。 FaceDetection 由于SFEW数据库给出的静态图像,背景非常复杂，同时为了后续的CNN表情分类，人脸的检测与对齐是非常重要的,因此作者级联了三个state-of-the-art的人脸检测算法，从而保证人脸检测的正确性.三种检测算法为(JDA,DCNN,MoT),图像事先resize为1024x576.总共帧为372,实验结果如下表所示: Method JDA DCNN MoT JDA+DCNN JDA+DCNN+MoT Det # 333 358 352 363 371 FacePreprocessing 数据预处理对后续的识别有极大的影响，良好的数据预处理可以去除样本间的无关噪声，并能够一定程度的做到数据增强。图像尺寸归一化(48x48)直方图均衡化,去均值除方差。 样本扩增(论文5.2),由于FER数据库包含35000+的图片，因此作者采用fer数据库进行预训练，作者对数据进行了随机的旋转，从而生成了更多的样本,使得网络训练的结果更具有鲁棒性。，样本生成公式以及效果图如下图所示: $$ 样本添加扰动后生成的图样与原始图样的对比 $$ CNNModel基本网络结构 5个conv+relu(step:1),3个stochastic pooling层(kernel_size:3*3,step:2),3个全连接层次(带relu+dropout)+softmax,随机初始化参数. 采用sgd优化方式,batch_size：128. $$ CNN网络结构图 $$ 损失函数与级联思想 损失函数为softmaxWithLoss，只不过计算的时候一个样本会与其生成的样本loss一起计算，整个网络用FER数据库进行预训练(base_lr:0.005)，当loss突然增加25%或者连续5次观察loss发现loss上升，则手动的减小学习率，最小的学习率设置为0.0001. 由于随机初始化参数，因此作者测试的时候，对多个网络进行级联，从而提高测试的准确率. $$ 测试时级联CNN网络结构图 $$ 相比较简单的加权投票平均的思想，作者认为可以通过学习策略，来决定网络的具体权重。所以提出了一个级联的似然函数，实际可以理解为根据各个网络的输出去学习一个全连接层.其中||w|| == 1. 实验结果 作者分别列出了在FER,SFEW上数据库的单独训练结果以及，采用提升的级联方式对最终结果的提高。 $$ FER数据集train \, val结果 $$ $$ FER数据集不同Loss与级联方式的结果 $$ $$ SFEW数据集Vote \, No Vote的结果 $$ $$ SFEW数据集不同Loss与级联方式的结果 $$ $$ SFEW数据库上的测试混淆矩阵 $$ 结论 预训练+提升的级联方式对最终的识别效果有效。同时，样本扩增对实验提升也是有作用的。 本文作者： 张峰本文链接： http://www.enjoyai.site/2018/01/08/InstallCaffe/版权声明： 本博客所有文章，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
+      <categories>
+        <category>Expression</category>
+      </categories>
+      <tags>
+        <tag>Paper</tag>
+        <tag>Expression</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Caffe经典网络-cifar10验证]]></title>
     <url>%2F2017%2F12%2F04%2FCAFFE-Net-Result%2F</url>
     <content type="text"><![CDATA[概述 本文对经典的网络模型在$cifar10$上进行了大致的验证，对比数据包括占用的显存，测试的准确率，训练时间、测试时间以及模型大小进行对比。由于部分网络的显存占用大，因此无法保证batch_size的设置一致，电脑显卡为$GTX1080Ti$，$11G$显存，迭代次数均为64000，初步的实验结果如下表: modelStrut Gpu Memory Batch_size Accuracy model Size train time test time Alex ~0.5G 128+128 0.7243 3.0M ~7min ~0.67ms LeNet ~0.5G 128+128 0.7840 ~0.35M ~28min ~0.84ms BN-LeNet ~1.35G 128+128 0.7985 ~0.35M ~16min ~0.86ms SqeezeNet_v1.1 ~1.25G 128+128 0.8030 ~2.8M ~30min ~3.02ms ResNet20 ~1.5G 128+128 0.8303 ~1.1M ~1h5min ~4.55ms ResNet32 ~2.5G 128+128 0.8741 ~1.9M ~1h53min ~6.91ms ResNet56 ~4.0G 128+128 0.8830 ~3.4M ~3h20min ~11.65ms WRN28_10 ~10.5G 64+128 0.8905 ~140M ~12h55min ~9.31ms Dense30 ~10.0G 32+64 0.9195 ~4.0M ~3h38min ~14.73ms NIN ~1.5G 128+128 0.8411 ~25M ~46min ~1.99ms GoolgeNet ~1.3G 128+128 0.7865 ~25M ~30min ~8.42ms 说明：由于训练的时候节省时间，有的网络一起开始训练的，因此显存占用与训练，测试时间可能与单个测试的时间有差异. modelStruct Gpu Memory Batch_size mAp model_size train_time test time MobileNet SSD ~7.4G 24+8 0.7243 ~23M 25k–~17h ~60ms faceBox ~7.7G 8+4 ## 本文作者： 张峰本文链接：[http://www.enjoyai.site/2017/12/04/CAFFE-Net-Result/ )版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
@@ -8,8 +20,8 @@
         <category>Facial Expression</category>
       </categories>
       <tags>
-        <tag>Facial Expression</tag>
         <tag>DeepLearning</tag>
+        <tag>Facial Expression</tag>
         <tag>Face Recognition</tag>
       </tags>
   </entry>
@@ -33,8 +45,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -45,8 +57,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -57,8 +69,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -69,8 +81,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -81,8 +93,8 @@
         <category>Facial Expression</category>
       </categories>
       <tags>
-        <tag>Facial Expression</tag>
         <tag>DeepLearning</tag>
+        <tag>Facial Expression</tag>
         <tag>Face Recognition</tag>
       </tags>
   </entry>
@@ -94,8 +106,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -106,20 +118,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Caffe DataLayer分析]]></title>
-    <url>%2F2017%2F10%2F20%2FCaffe%20Data%E5%B1%82%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[Caffe DataLayer分析 Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。 $（1）\,DataLayer$ $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等 1.基本数据成员1DataRead reader_;//data_reader.hpp,cpp用以定义读取数据的操作 2.基本成员函数 主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始123456789101112//LayerSetuptemplate &lt;typename Dtype&gt;void DataLayer&lt;Dtype&gt;::LayerSetup(const vector&lt;Blob&gt;*&gt;&amp; bottom, const vector&lt;Blob&gt;*&gt;&amp; top)&#123; const DataParamter&amp; param = this-&gt;layer_param_-&gt;data_param(); const int batch_size = param.batch_size(); Datum&amp; datum = *(reader_.full().peek()); //数据库的读取操作&#125; 本文作者： 张峰本文链接：https://zhanglaplace.github.io/2017/10/20版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
-      <categories>
-        <category>Caffe</category>
-      </categories>
-      <tags>
         <tag>DeepLearning</tag>
-        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
@@ -130,8 +130,20 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Caffe DataLayer分析]]></title>
+    <url>%2F2017%2F10%2F20%2FCaffe%20Data%E5%B1%82%E5%88%86%E6%9E%90%2F</url>
+    <content type="text"><![CDATA[Caffe DataLayer分析 Caffe的$data$层作为网络的起始部分，是网络的最底层，其不仅提供了数据的输入，也提供了数据的格式转换，而数据的来源可以来自于高效率的数据库 $(lmdb,levelDb)$,也可以来自于内存，$HDF5$文件等。 $（1）\,DataLayer$ $Data$作为最常用的$caffe$网络训练的数据输入，其参数也比较多，具体可以参见$proto$中关于$DataParameter$的定义,通过$Datalayer$可以完成数据的转化，需要指明$source,batch_size$,也可以指明$mirror,crop,backend$等 1.基本数据成员1DataRead reader_;//data_reader.hpp,cpp用以定义读取数据的操作 2.基本成员函数 主要包括$Layersetup$函数，该函数为整个网络架构搭建的开始123456789101112//LayerSetuptemplate &lt;typename Dtype&gt;void DataLayer&lt;Dtype&gt;::LayerSetup(const vector&lt;Blob&gt;*&gt;&amp; bottom, const vector&lt;Blob&gt;*&gt;&amp; top)&#123; const DataParamter&amp; param = this-&gt;layer_param_-&gt;data_param(); const int batch_size = param.batch_size(); Datum&amp; datum = *(reader_.full().peek()); //数据库的读取操作&#125; 本文作者： 张峰本文链接：https://zhanglaplace.github.io/2017/10/20版权声明：本博客所有文章，均采用CC BY-NC-SA 3.0 许可协议。转载请注明出处！]]></content>
+      <categories>
+        <category>Caffe</category>
+      </categories>
+      <tags>
+        <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -142,8 +154,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -154,8 +166,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -166,8 +178,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
@@ -178,8 +190,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>DeepLearning</tag>
         <tag>Caffe</tag>
+        <tag>DeepLearning</tag>
       </tags>
   </entry>
   <entry>
